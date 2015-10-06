@@ -1,28 +1,18 @@
-== README
+== Food Finder
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+== Project Description
+Food Finder dipslays Free/Discounted Food in your area
 
-Things you may want to cover:
+== Pivotal Tracker
+https://www.pivotaltracker.com/n/projects/1443776
 
-* Ruby version
+== Team Members
+Cam McCarthy
 
-* System dependencies
+Nikolas Chaconas
 
-* Configuration
+Jenna Cryan
 
-* Database creation
+Ben Hartl
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Michael Radbel
