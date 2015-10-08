@@ -1,7 +1,7 @@
 == Food Finder
 
 == Project Description
-Food Finder dipslays Free/Discounted Food in your area
+Food Finder displays Free/Discounted Food in your area
 
 == Pivotal Tracker
 https://www.pivotaltracker.com/n/projects/1443776
