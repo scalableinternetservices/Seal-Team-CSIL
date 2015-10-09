@@ -1,7 +1,11 @@
 == Food Finder
 
 == Project Description
-Food Finder displays Free/Discounted Food in your area
+Food Finder displays free/discounted food in your area. Restaurants and organizations can 
+add flash deals which are viewable to users of the site. Two views are in the works, a 
+graphical view using the Google Maps API (presumably) and a timeline view which shows what
+deals are available on a given day and time. The radius of deals can be set depending upon
+how far you are willing to drive to get the best deals as well.
 
 == Pivotal Tracker
 https://www.pivotaltracker.com/n/projects/1443776
