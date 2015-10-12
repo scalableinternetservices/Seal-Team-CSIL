@@ -29,6 +29,12 @@ gem 'bcrypt', '~> 3.1.7'
 # Bootstrap gem for visual appeal
 gem 'bootstrap-sass', '~> 3.2.0'
 
+# Gem for getting latitude/longitude from address
+gem 'geocoder'
+
+# Gem for the Google Map API
+gem 'gmaps4rails'  
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
