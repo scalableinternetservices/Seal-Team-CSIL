@@ -1,0 +1,10 @@
+<%= form_for @user, url: update_user_path do |f| %>
+  <p>Name: <%= f.text_field :name, :placeholder => @user.name %> </p>
+  <p> Email: <%= f.text_field :email, :placeholder => @user.email %> </p>
+  <p> Style Of Food: <%= f.text_field :food_type, :placeholder => @user.food_type %> </p>
+  <p> Address: <%= f.text_field :address, :placeholder => @user.address %> </p>
+  <p> Phone Number: <%= f.text_field :phone_number, :placeholder => @user.phone_number %> </p>
+  <p> Hours: <%= f.text_field :hours, :placeholder => @user.hours %> </p>
+  <p> Delivery? <%= f.text_field :delivery, :placeholder => @user.delivery %> </p>
+  <%= f.submit "Submit" %>
+<% end %>
