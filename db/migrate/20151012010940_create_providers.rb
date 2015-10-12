@@ -5,10 +5,12 @@ class CreateProviders < ActiveRecord::Migration
       t.string :email
       t.string :password_digest
       t.string :food_type
-      t.string :location
+      t.string :address
       t.string :phone_number
       t.string :hours
       t.string :delivery
+      t.float  :latitude
+      t.float  :longitude
       t.timestamps null: false
     end
   end
