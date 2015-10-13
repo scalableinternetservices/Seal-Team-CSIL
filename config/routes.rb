@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   root "graph#show"
 
+  post '/users/:id/deals/' => 'deals#create', as: 'create_deal'
+  get '/users/:id/deals/' => 'deals#new', as: 'new_deal'
+
   get '/signup' => 'users#new'
   post '/users' => 'users#create'
 
