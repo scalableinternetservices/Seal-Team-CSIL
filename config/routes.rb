@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
 
-  root "home#show"
+  root "graph#show"
 
   get '/signup' => 'users#new'
   post '/users' => 'users#create'
+
+  get '/timeline' => 'timeline#show'
 
   get "users/:id" => "users#show", as: 'show_user'
   get "users/:id/edit" => "users#edit", as: 'edit_user'

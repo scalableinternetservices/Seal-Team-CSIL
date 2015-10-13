@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def authorize
+    flash[:error] = "Please login before continuing!" unless current_user
     redirect_to '/login' unless current_user
   end
 end

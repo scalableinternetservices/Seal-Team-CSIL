@@ -1,4 +1,4 @@
-<h1> Welcome to your user account page! </h1>
+<h1 class='center'> Welcome to your user account page! </h1>
 
 <ul>
   <li> Name: <%= @user.name %> </li>
@@ -10,4 +10,4 @@
   <li> Delivery? <%= @user.delivery %> </li>
 </ul>
 
-<%= link_to "Home", root_path %> | <%= link_to "Edit", edit_user_path(@user) %>
+<p class = 'center'> <%= link_to "Home", root_path %> | <%= link_to "Edit", edit_user_path(@user) %> </p>
