@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_filter :authorize, :only => [:show, :edit, :update]
+
   def new
     # Render the login view
   end
@@ -21,8 +23,10 @@ class UsersController < ApplicationController
     user.update(user_params)
     if user.save
       session[:user_id] = user.id
+      flash[:success] = "Your information has been updated."
       redirect_to '/'
     else
+      flash[:error] = "Something went wrong. Change this when specific validations are created."
       redirect_to '/user/:id'
     end
   end
@@ -32,8 +36,10 @@ class UsersController < ApplicationController
     user = User.new(user_params)
     if user.save
       session[:user_id] = user.id
+      flash[:success] = "Account has been created!"
       redirect_to '/'
     else
+      flash[:error] = "Something went wrong in creating the account!"
       redirect_to '/signup'
     end
 
