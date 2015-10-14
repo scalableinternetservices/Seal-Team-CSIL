@@ -13,17 +13,21 @@
   <div id="map_canvas" class="map_canvas"></div>
 </div>
 <script type="text/javascript">
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(function(position) {
+    var mapOptions = {
+      center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+      zoom: 16}
+      initMap(mapOptions)
+  });
+}
+else {alert("Please use a browser that supports HTML5")}
 
-navigator.geolocation.getCurrentPosition(function(position) {
-  mapOptions = {
-    center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-    zoom: 16
-  };
+  function initMap(mapOptions) {
   handler = Gmaps.build('Google');
   handler.buildMap({ provider: mapOptions, internal: {id: 'map_canvas'}}, function(){
     markers = handler.addMarkers(<%=raw @hash.to_json %>);
     handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
   });
-});
+}
 </script>
