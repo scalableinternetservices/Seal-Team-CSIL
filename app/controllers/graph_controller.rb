@@ -15,7 +15,7 @@ class GraphController < ApplicationController
         if coordinate_distance([lat,lng],[deal.latitude, deal.longitude]) < 8000
           marker.lat deal.latitude
           marker.lng deal.longitude
-          marker.infowindow "Deal: " + deal.food_name
+          marker.infowindow createInfoWindow(deal)
         end
       end
     end
