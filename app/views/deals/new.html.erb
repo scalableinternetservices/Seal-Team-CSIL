@@ -1,6 +1,6 @@
 <h1> Add a new deal for your organization! </h1>
 
-<%= form_for :deal, url: '/users/:id/deals' do |f| %>
+<%= form_for :deal, url: '/users/:id/create_deal' do |f| %>
 <ul>
   <li> Food Name: <%= f.text_field :food_name %> </li>
   <li> Description: <%= f.text_field :description %> </li>
