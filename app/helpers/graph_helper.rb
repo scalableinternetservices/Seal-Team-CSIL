@@ -9,7 +9,5 @@ module GraphHelper
     #{deal.start_time}
     #{deal.end_time}
     <div> <a href=#{deal.user.website}> Website</div>"
-
-
   end
 end

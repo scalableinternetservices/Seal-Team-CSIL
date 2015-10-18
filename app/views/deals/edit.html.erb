@@ -1,0 +1,12 @@
+<%= form_for @deal, url: update_deal_path(user_id: @user.id, deal_id: @deal.id) do |f| %>
+<ul>
+  <li> Food Name: <%= f.text_field :food_name, :placeholder => @deal.food_name %>  </li>
+  <li> Description: <%= f.text_field :description, :placeholder => @deal.description %> </li>
+  <li> Location Of Deal: <%= f.text_field :address, :placeholder => @deal.address %> </li>
+  <li> Deal Type: <%= f.text_field :deal_type, :placeholder => @deal.deal_type %> </li>
+  <li> Start Time: <%= f.text_field :start_time, :placeholder => @deal.start_time %> </li>
+  <li> End Time: <%= f.text_field :end_time, :placeholder => @deal.end_time %> </li>
+  <li> Food Type: <%= f.text_field :food_type, :placeholder => @deal.food_type %> </li>
+</ul>
+  <%= f.submit "Submit" %>
+<% end %>

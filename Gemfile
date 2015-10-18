@@ -36,7 +36,7 @@ gem 'geocoder'
 gem 'gmaps4rails'
 
 # Gem for allowing file attachments for users to upload pictures of their restaurants.
-gem "paperclip", "~> 4.3"
+gem "paperclip", :git => "http://github.com/thoughtbot/paperclip.git"
 
 # Use Unicorn as the app server
 # gem 'unicorn'
