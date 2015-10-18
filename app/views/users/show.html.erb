@@ -8,6 +8,8 @@
   <li> Phone Number: <%= @user.phone_number %> </li>
   <li> Hours: <%= @user.hours %> </li>
   <li> Delivery? <%= @user.delivery %> </li>
+  <li> Website: <%= @user.website %> </li>
+  <li> Image: <%= image_tag @user.avatar.url %> </li>
 </ul>
 
 <p class = 'center'> <%= link_to "Home", root_path %> | <%= link_to "Add Food Deal", new_deal_path(@user) %> | <%= link_to "Edit", edit_user_path(@user) %> </p>
