@@ -6,5 +6,7 @@
   <p> Phone Number: <%= f.text_field :phone_number, :placeholder => @user.phone_number %> </p>
   <p> Hours: <%= f.text_field :hours, :placeholder => @user.hours %> </p>
   <p> Delivery? <%= f.text_field :delivery, :placeholder => @user.delivery %> </p>
+    <p> Website? <%= f.text_field :website %> </p>
+    <p> Restaurant pic: <%= f.file_field :avatar %> </p>
   <%= f.submit "Submit" %>
 <% end %>

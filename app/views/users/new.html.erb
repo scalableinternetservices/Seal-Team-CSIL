@@ -1,6 +1,6 @@
 <h1> Welcome to the create a new account page! </h1> 
 
-<%= form_for :user, url: '/users' do |f| %>
+<%= form_for :user, url: '/users', html: { multipart: true } do |f| %>
 
 <ul>
   <li> Name: <%= f.text_field :name %> </li>
@@ -12,6 +12,9 @@
   <li> Phone Number: <%= f.text_field :phone_number %> </li>
   <li> Hours: <%= f.text_field :hours %> </li>
   <li> Delivery? <%= f.text_field :delivery %> </li>
+  <li> Website? <%= f.text_field :website %> </li>
+  <li> Restaurant pic: <%= f.file_field :avatar %> </li>
+
 </ul>
   <%= f.submit "Submit" %>
 <% end %>

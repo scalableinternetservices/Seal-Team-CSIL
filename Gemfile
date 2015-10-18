@@ -33,7 +33,10 @@ gem 'bootstrap-sass', '~> 3.2.0'
 gem 'geocoder'
 
 # Gem for the Google Map API
-gem 'gmaps4rails'  
+gem 'gmaps4rails'
+
+# Gem for allowing file attachments for users to upload pictures of their restaurants.
+gem "paperclip", "~> 4.3"
 
 # Use Unicorn as the app server
 # gem 'unicorn'
