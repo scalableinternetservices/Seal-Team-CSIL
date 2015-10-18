@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   root "graph#show"
+  get  "/graph/load_local_deals"
 
   post '/users/:id/create_deal/' => 'deals#create', as: 'create_deal'
   get '/users/:id/create_deal/' => 'deals#new', as: 'new_deal'
