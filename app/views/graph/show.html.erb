@@ -15,15 +15,31 @@
 <script type="text/javascript">
 
     function getViewerLocation(){
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var mapOptions = {
-                    center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-                    zoom: 16};
-                initMap(mapOptions)
-            });
-        }
-        else {alert("Please use a browser that supports HTML5")}
+        <% if @lat.present? && @lng.present?%>
+            console.log("cached");
+            var mapOptions = {
+                center: new google.maps.LatLng(<%= @lat %>, <%= @lng %>),
+                zoom: 16};
+            initMap(mapOptions);
+        <% else %>
+            console.log('not cached');
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var mapOptions = {
+                        center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+                        zoom: 16};
+                    console.log("got location");
+                    $.ajax({
+                        url: "graph/save_user_location",
+                        type: "POST",
+                        data: {lat: position.coords.latitude, lng: position.coords.longitude}
+                    });
+                    console.log("sent location");
+                    initMap(mapOptions)
+                });
+            }
+            else {alert("Please use a browser that supports HTML5")}
+        <% end %>
     }
     function getMarkers(lat, lng){
         return $.ajax({
@@ -34,6 +50,7 @@
         });
     }
     function initMap(mapOptions) {
+        console.log("building map");
         handler = Gmaps.build('Google');
         handler.buildMap({ provider: mapOptions, internal: {id: 'map_canvas'}}, function(){
             getMarkers(handler.getMap().getCenter().A, handler.getMap().getCenter().F).done(function(result) {
