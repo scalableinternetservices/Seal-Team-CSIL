@@ -1,6 +1,6 @@
 class DealsController < ApplicationController
 
-  before_filter :authorize, :only => [:create, :new, :show :edit, :update, :destroy]
+  before_filter :authorize, :only => [:create, :new, :show, :edit, :update, :destroy]
 
   def create
     deal = Deal.new(deals_params)
