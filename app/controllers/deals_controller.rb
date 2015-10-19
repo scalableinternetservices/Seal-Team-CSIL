@@ -1,6 +1,6 @@
 class DealsController < ApplicationController
 
-  before_filter :authorize, :only => [:create, :new, :edit, :update]
+  before_filter :authorize, :only => [:create, :new, :show :edit, :update, :destroy]
 
   def create
     deal = Deal.new(deals_params)
@@ -36,6 +36,17 @@ class DealsController < ApplicationController
     deal.update(deals_params)
     if deal.save!
       flash[:success] = "Your deal has been updated."
+      redirect_to "/users/#{params[:user_id]}/deals"
+    else
+      flash[:error] = "Something went wrong. Change this when specific validations are created."
+      redirect_to "/users/#{params[:user_id]}/deals"
+    end
+  end
+
+  def destroy
+    deal = Deal.find_by(:id => params[:deal_id])
+    if deal.destroy!
+      flash[:success] = "Your deal has been destroyed."
       redirect_to "/users/#{params[:user_id]}/deals"
     else
       flash[:error] = "Something went wrong. Change this when specific validations are created."

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/users/:id/deals' => 'deals#show', as: 'show_deals'
   get '/users/:user_id/deals/:deal_id' => 'deals#edit', as: 'edit_deal'
   patch '/users/:user_id/deals/:deal_id' => 'deals#update', as: 'update_deal'
+  delete '/users/:user_id/deals/:deal_id' => 'deals#destroy', as: 'delete_deal'
 
   get '/signup' => 'users#new'
   post '/users' => 'users#create'
