@@ -18,5 +18,9 @@
 </div>
 
 <script type="text/javascript">
-    getViewerLocation(<%= @lat %>, <%= @lng %>);
+    <% if @lat.present? && @lng.present?%>
+        getViewerLocation(<%= @lat %>, <%= @lng %>);
+    <% else %>
+        findUser();
+    <% end %>
 </script>
