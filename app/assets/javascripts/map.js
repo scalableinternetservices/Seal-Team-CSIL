@@ -11,25 +11,17 @@ function findUser(){
                 data: {lat: position.coords.latitude, lng: position.coords.longitude}
             });
             console.log("sent location");
-            return mapOptions;
+            initMap(mapOptions)
         });
     }
     else {
         alert("Please use a browser that supports HTML5")}
 }
 function getViewerLocation(lat, lng){
-    if(typeof lat !== 'undefined' & typeof lng !== 'undefined')
-    {
-        console.log("cached");
-        var mapOptions = {
-            center: new google.maps.LatLng(lat,lng),
-            zoom: 16};
-        initMap(mapOptions);
-    }
-    else{
-        console.log('not cached');
-        initMap(findUser());
-    }
+    var mapOptions = {
+        center: new google.maps.LatLng(lat,lng),
+        zoom: 16};
+    initMap(mapOptions);
 }
 function getMarkers(lat, lng){
     return $.ajax({
