@@ -5,13 +5,12 @@ class DealsController < ApplicationController
   def create
     deal = Deal.new(deals_params)
     deal.user_id = current_user.id
-    if deal.save!
-      flash[:success] = "Deal has been created!"
-      redirect_to "/users/#{current_user.id}/deals"
-    else
+    deal.save!
+    flash[:success] = "Deal has been created!"
+    redirect_to "/users/#{current_user.id}/deals"
+    rescue
       flash[:error] = "Something went wrong in creating the deal!"
       redirect_to "/users/#{current_user.id}/deals"
-    end
   end 
 
   def new
@@ -34,13 +33,12 @@ class DealsController < ApplicationController
   def update
     deal = Deal.find_by(:id => params[:deal_id])
     deal.update(deals_params)
-    if deal.save!
-      flash[:success] = "Your deal has been updated."
-      redirect_to "/users/#{params[:user_id]}/deals"
-    else
-      flash[:error] = "Something went wrong. Change this when specific validations are created."
-      redirect_to "/users/#{params[:user_id]}/deals"
-    end
+    deal.save!
+    flash[:success] = "Deal has been created!"
+    redirect_to "/users/#{current_user.id}/deals"
+  rescue
+    flash[:error] = "Something went wrong in editing the deal!"
+    redirect_to "/users/#{current_user.id}/deals"
   end
 
   def destroy

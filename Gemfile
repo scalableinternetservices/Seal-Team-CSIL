@@ -41,6 +41,9 @@ gem "paperclip", :git => "http://github.com/thoughtbot/paperclip.git"
 #Gem for respond with
 gem 'responders', '~> 2.0'
 
+#Gem for Street Address Validation
+gem 'StreetAddress', :require => "street_address"
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
