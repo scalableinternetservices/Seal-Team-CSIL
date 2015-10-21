@@ -12,6 +12,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    StreetAddress (1.0.6)
     actionmailer (4.2.4)
       actionpack (= 4.2.4)
       actionview (= 4.2.4)
@@ -163,6 +164,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  StreetAddress
   bcrypt (~> 3.1.7)
   bootstrap-sass (~> 3.2.0)
   byebug
