@@ -27,7 +27,7 @@ class UsersController < ApplicationController
       redirect_to '/'
     else
       flash[:error] = "Something went wrong. Change this when specific validations are created."
-      redirect_to '/user/:id'
+      redirect_to "/users/#{user.id}"
     end
   end
 
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     if user.save!
       session[:user_id] = user.id
       flash[:success] = "Account has been created!"
-      redirect_to '/'
+      redirect_to "/users/#{user.id}"
     else
       flash[:error] = "Something went wrong in creating the account!"
       redirect_to '/signup'
