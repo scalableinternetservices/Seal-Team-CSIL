@@ -1,20 +1,65 @@
-<h1> Welcome to the create a new account page! </h1> 
+ <h1 class='center'> New Account </h1>
+  <%= form_for :user, :html => {:class => "form-horizontal"}, url: '/users' do |f| %>
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :name, "Name:" %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
 
-<%= form_for :user, url: '/users', html: { multipart: true } do |f| %>
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :email, "Email:" %>
+      <%= f.text_field :email, class: "form-control" %>
+    </div>
+    
+     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :password, "Password:" %>
+      <%= f.password_field :password, class: "form-control" %>
+    </div>
+    
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :password_confirmation, "Confirm Password:" %>
+      <%= f.password_field :password_confirmation, class: "form-control" %>
+    </div>
+    
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :food_type, "Style of Food:" %>
+      <%= f.collection_select :food_type, 
+                          [ 'Breakfast', 'Sandwiches', 'Sushi', 'Italian', 'Chinese', 'Pizza', 'Mexican' ], 
+                          :to_s, :to_s, :include_blank => true, class: "form-control" %>
+    </div>
 
-<ul>
-  <li> Name: <%= f.text_field :name %> </li>
-  <li> Email: <%= f.text_field :email %> </li>
-  <li> Password: <%= f.password_field :password %> </li>
-  <li> Password Confirmation: <%= f.password_field :password_confirmation %> </li>
-  <li> Style Of Food: <%= f.text_field :food_type %> </li>
-  <li> Address: <%= f.text_field :address %> </li>
-  <li> Phone Number: <%= f.text_field :phone_number %> </li>
-  <li> Hours: <%= f.text_field :hours %> </li>
-  <li> Delivery? <%= f.text_field :delivery %> </li>
-  <li> Website? <%= f.text_field :website %> </li>
-  <li> Restaurant pic: <%= f.file_field :avatar %> </li>
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :address, "Address:" %>
+      <%= f.text_area :address, size: "25x5", class: "form-control" %>
+    </div>
 
-</ul>
-  <%= f.submit "Submit" %>
-<% end %>
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :phone_number, "Phone Number:" %>
+      <%= f.text_field :phone_number, class: "form-control" %>
+    </div>
+
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :hours, "Hours:" %>
+      <%= f.text_field :hours, class: "form-control" %>
+    </div>
+
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :delivery, "Delivery?" %>
+      <%= f.radio_button :delivery, "Yes" %> 
+      <%= f.label :delivery, "Yes, we offer delivery!" %>
+      <%= f.radio_button :delivery, "No" %>
+      <%= f.label :delivery, "No, we don't offer delivery" %>
+    </div>
+    
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :website, "Website:" %>
+      <%= f.text_field :website, class: "form-control" %>
+    </div>
+    
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :avatar, "Picture:" %>
+      <%= f.file_field :avatar, class: "form-control" %>
+    </div>
+    
+    <%= f.submit "Submit", class: "btn btn-info btn-circle btn-xl", style:"width:30%;display:table;
+   margin:0 auto" %>
+  <% end %>
