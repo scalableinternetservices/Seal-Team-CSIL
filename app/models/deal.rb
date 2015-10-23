@@ -7,8 +7,7 @@ class Deal < ActiveRecord::Base
   #only validates accurate address format, not if its a non-real address
   validate         :validate_address
   validates        :phone_number, phony_plausible: true
-  validates        :food_type, inclusion: ['Breakfast', 'Sandwiches', 'Sushi', 'Italian', 'Chinese', 'Pizza', 'Mexican' ]
-  validates        :deal_type, inclusion: ['Free', 'Buy one Get one Free', 'Buy one Get one Half Off']
+  validates        :deal_type, inclusion: [ 'Free', 'Buy one Get one Free', 'Buy one Get one Half Off' ]
   geocoded_by      :address
   after_validation :geocode
 
