@@ -1,15 +1,54 @@
-<h1 class='center'> Welcome to your user account page! </h1>
 
-<ul>
-  <li> Name: <%= @user.name %> </li>
-  <li> Email: <%= @user.email %> </li>
-  <li> Style Of Food: <%= @user.food_type %> </li>
-  <li> Address: <%= @user.address %> </li>
-  <li> Phone Number: <%= @user.phone_number %> </li>
-  <li> Hours: <%= @user.hours %> </li>
-  <li> Delivery? <%= @user.delivery %> </li>
-  <li> Website: <%= @user.website %> </li>
-  <li> Image: <%= image_tag @user.avatar.url %> </li>
-</ul>
 
+ <h1 class='center'> User Profile </h1>
+   <%= form_for :user, :html => {:class => "form-horizontal"}, url: '/users/:id/' do |f| %>
+
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :name, "Name:" %>
+      <%= @user.name %>
+    </div>
+
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :email, "Email:" %>
+      <%= @user.email %>
+    </div>
+    
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :food_type, "Style of Food:" %>
+      <%= @user.food_type %>
+    </div>
+
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :address, "Address:" %>
+      <%= @user.address %>
+    </div>
+
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :phone_number, "Phone Number:" %>
+      <%= @user.phone_number %>
+    </div>
+
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :hours, "Hours:" %>
+      <%= @user.hours %>
+    </div>
+
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :delivery, "Delivery?" %>
+      <%= @user.delivery %>
+    </div>
+    
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :website, "Website:" %>
+      <%= @user.website %>
+    </div>
+    
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :avatar, "Picture:" %>
+      <%= @user.avatar.url %>
+    </div>
+  
+  <% end %>
+  
 <p class = 'center'> <%= link_to "Home", root_path %> | <%= link_to "Add Food Deal", new_deal_path(@user) %> | <%= link_to "Show Food Deals", show_deals_path(@user) %> | <%= link_to "Edit", edit_user_path(@user) %> </p>
+

@@ -1,12 +1,55 @@
-<%= form_for @user, url: update_user_path do |f| %>
-  <p>Name: <%= f.text_field :name, :placeholder => @user.name %> </p>
-  <p> Email: <%= f.text_field :email, :placeholder => @user.email %> </p>
-  <p> Style Of Food: <%= f.text_field :food_type, :placeholder => @user.food_type %> </p>
-  <p> Address: <%= f.text_field :address, :placeholder => @user.address %> </p>
-  <p> Phone Number: <%= f.text_field :phone_number, :placeholder => @user.phone_number %> </p>
-  <p> Hours: <%= f.text_field :hours, :placeholder => @user.hours %> </p>
-  <p> Delivery? <%= f.text_field :delivery, :placeholder => @user.delivery %> </p>
-    <p> Website? <%= f.text_field :website %> </p>
-    <p> Restaurant pic: <%= f.file_field :avatar %> </p>
-  <%= f.submit "Submit" %>
-<% end %>
+ <h1 class='center'> Edit Profile </h1>
+  <%= form_for :user, :html => {:class => "form-horizontal"}, url: '/users/:id/edit' do |f| %>
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :name, "Name:" %>
+      <%= f.text_field :name, :placeholder => @user.name, class: "form-control" %>
+    </div>
+
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :email, "Email:" %>
+      <%= f.text_field :email, :placeholder => @user.email, class: "form-control" %>
+    </div>
+    
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :food_type, "Style of Food:" %>
+      <%= f.collection_select :food_type, 
+                          [ 'Breakfast', 'Sandwiches', 'Sushi', 'Italian', 'Chinese', 'Pizza', 'Mexican' ], 
+                          :to_s, :to_s, :placeholder => @user.food_type, class: "form-control" %>
+    </div>
+
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :address, "Address:" %>
+      <%= f.text_area :address, size: "25x5", :placeholder => @user.address, class: "form-control" %>
+    </div>
+
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :phone_number, "Phone Number:" %>
+      <%= f.text_field :phone_number, :placeholder => @user.phone_number, class: "form-control" %>
+    </div>
+
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :hours, "Hours:" %>
+      <%= f.text_field :hours, :placeholder => @user.name, class: "form-control" %>
+    </div>
+
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :delivery, "Delivery?" %>
+      <%= f.radio_button :delivery, "Yes", :placeholder => @user.delivery %> 
+      <%= f.label :delivery, "Yes, we offer delivery!", :placeholder => "Yes" %>
+      <%= f.radio_button :delivery, "No", :placeholder => @user.delivery %>
+      <%= f.label :delivery, "No, we don't offer delivery", :placeholder => "No" %>
+    </div>
+    
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :website, "Website:" %>
+      <%= f.text_field :website, :placeholder => @user.delivery, class: "form-control" %>
+    </div>
+    
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :avatar, "Picture:" %>
+      <%= f.file_field :avatar, :placeholder => @user.avatar.url, class: "form-control" %>
+    </div>
+
+    <%= f.submit "Submit", class: "btn btn-info btn-circle btn-xl", style:"width:30%;display:table;
+   margin:0 auto" %>
+  <% end %>

@@ -1,14 +1,39 @@
-<h1> Add a new deal for your organization! </h1>
+ <h1 class='center'> New Deal </h1>
+  <%= form_for :deal, :html => {:class => "form-horizontal"}, url: '/users/:id/create_deal' do |f| %>
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :food_name, "Food Name:" %>
+      <%= f.text_field :food_name, class: "form-control" %>
+    </div>
 
-<%= form_for :deal, url: '/users/:id/create_deal' do |f| %>
-<ul>
-  <li> Food Name: <%= f.text_field :food_name %> </li>
-  <li> Description: <%= f.text_field :description %> </li>
-  <li> Location Of Deal: <%= f.text_field :address %> </li>
-  <li> Deal Type: <%= f.text_field :deal_type %> </li>
-  <li> Start Time: <%= f.text_field :start_time %> </li>
-  <li> End Time: <%= f.text_field :end_time %> </li>
-  <li> Food Type: <%= f.text_field :food_type %> </li>
-</ul>
-  <%= f.submit "Submit" %>
-<% end %>
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :description, "Description:" %>
+      <%= f.text_field :description, class: "form-control" %>
+    </div>
+
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :address, "Address:" %>
+      <%= f.text_field :address, class: "form-control" %>
+    </div>
+
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :deal_type, "Deal Type:" %>
+      <%= f.text_field :deal_type, class: "form-control" %>
+    </div>
+
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :start_time, "Start Time:" %>
+      <%= f.text_field :start_time, class: "form-control" %>
+    </div>
+
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :end_time, "End Time:" %>
+      <%= f.text_field :end_time, class: "form-control" %>
+    </div>
+
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+      <%= f.label :food_type, "Food Type:" %>
+      <%= f.text_field :food_type, class: "form-control" %>
+    </div>
+    <%= f.submit "Submit", class: "btn btn-info btn-circle btn-xl", style:"width:30%;display:table;
+   margin:0 auto" %>
+  <% end %>
