@@ -1,7 +1,7 @@
 
 
  <h1 class='center'> User Profile </h1>
-   <%= form_for :user, :html => {:class => "form-horizontal"}, url: '/users/:id/' do |f| %>
+   <%= form_for :user, :html => {:class => "form-horizontal"}, url: '/users/:id/users#show' do |f| %>
 
     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
       <%= f.label :name, "Name:" %>
