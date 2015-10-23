@@ -7,7 +7,7 @@
 
     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
       <%= f.label :description, "Description:" %>
-      <%= f.text_field :description, class: "form-control" %>
+      <%= f.text_area :address, size: "25x5", class: "form-control" %>
     </div>
 
     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
@@ -24,16 +24,16 @@
 
     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
       <%= f.label :start_time, "Start Time:" %>
-      <%= f.collection_select :start_time, 
-                          [ '12:00 am', '1:00 am', '2:00 am', '3:00 am', '4:00 am', '5:00 am', '6:00 am', '7:00 am', '8:00am', '9:00 am', '10:00 am', '11:00 am', '12:00pm', '1:00 pm', '2:00 pm', '3:00 pm', '4:00 pm', '5:00 pm', '6:00 pm', '7:00 pm', '8:00pm', '9:00 pm', '10:00 pm', '11:00 pm', '12:00pm' ], 
-                          :to_s, :to_s, :include_blank => true, class: "form-control" %>
+      <%= f.datetime_select(:start_time, start_year: 2015, ampm: true) %>
     </div>
 
     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
       <%= f.label :end_time, "End Time:" %>
-      <%= f.collection_select :end_time, 
-                          [ '12:00 am', '1:00 am', '2:00 am', '3:00 am', '4:00 am', '5:00 am', '6:00 am', '7:00 am', '8:00am', '9:00 am', '10:00 am', '11:00 am', '12:00pm', '1:00 pm', '2:00 pm', '3:00 pm', '4:00 pm', '5:00 pm', '6:00 pm', '7:00 pm', '8:00pm', '9:00 pm', '10:00 pm', '11:00 pm', '12:00pm' ], 
-                          :to_s, :to_s, :include_blank => true, class: "form-control" %>
+      
+      
+
+      <%= f.datetime_select(:end_time, start_year: 2015, ampm: true) %>
+
     </div>
 
     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
