@@ -17,22 +17,30 @@
 
     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
       <%= f.label :deal_type, "Deal Type:" %>
-      <%= f.text_field :deal_type, class: "form-control" %>
+      <%= f.collection_select :deal_type, 
+                          [ 'Free', 'Buy one Get one Free', 'Buy one Get one Half Off'], 
+                          :to_s, :to_s, :include_blank => true, class: "form-control" %>
     </div>
 
     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
       <%= f.label :start_time, "Start Time:" %>
-      <%= f.text_field :start_time, class: "form-control" %>
+      <%= f.collection_select :start_time, 
+                          [ '12:00 am', '1:00 am', '2:00 am', '3:00 am', '4:00 am', '5:00 am', '6:00 am', '7:00 am', '8:00am', '9:00 am', '10:00 am', '11:00 am', '12:00pm', '1:00 pm', '2:00 pm', '3:00 pm', '4:00 pm', '5:00 pm', '6:00 pm', '7:00 pm', '8:00pm', '9:00 pm', '10:00 pm', '11:00 pm', '12:00pm' ], 
+                          :to_s, :to_s, :include_blank => true, class: "form-control" %>
     </div>
 
     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
       <%= f.label :end_time, "End Time:" %>
-      <%= f.text_field :end_time, class: "form-control" %>
+      <%= f.collection_select :end_time, 
+                          [ '12:00 am', '1:00 am', '2:00 am', '3:00 am', '4:00 am', '5:00 am', '6:00 am', '7:00 am', '8:00am', '9:00 am', '10:00 am', '11:00 am', '12:00pm', '1:00 pm', '2:00 pm', '3:00 pm', '4:00 pm', '5:00 pm', '6:00 pm', '7:00 pm', '8:00pm', '9:00 pm', '10:00 pm', '11:00 pm', '12:00pm' ], 
+                          :to_s, :to_s, :include_blank => true, class: "form-control" %>
     </div>
 
     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
       <%= f.label :food_type, "Food Type:" %>
-      <%= f.text_field :food_type, class: "form-control" %>
+      <%= f.collection_select :food_type, 
+                          [ 'Breakfast', 'Sandwiches', 'Sushi', 'Italian', 'Chinese', 'Pizza', 'Mexican' ], 
+                          :to_s, :to_s, :include_blank => true, class: "form-control" %>
     </div>
     <%= f.submit "Submit", class: "btn btn-info btn-circle btn-xl", style:"width:30%;display:table;
    margin:0 auto" %>
