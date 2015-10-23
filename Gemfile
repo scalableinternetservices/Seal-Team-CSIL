@@ -26,6 +26,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+#Gem for email validation
+gem 'email_validator'
+
 # Bootstrap gem for visual appeal
 gem 'bootstrap-sass', '~> 3.2.0'
 
@@ -43,6 +46,10 @@ gem 'responders', '~> 2.0'
 
 #Gem for Street Address Validation
 gem 'StreetAddress', :require => "street_address"
+
+#Gem for phone number validation
+gem 'phony_rails'
+
 
 # Use Unicorn as the app server
 # gem 'unicorn'

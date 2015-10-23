@@ -5,10 +5,11 @@ class Deal < ActiveRecord::Base
   #Lat and Lng generated anyway if valid address
   validates :food_name, :address, :start_time, :end_time, presence: true
   #only validates accurate address format, not if its a non-real address
-  validate   :validate_address
-  validates :food_type, inclusion: ['Breakfast', 'Sandwiches', 'Sushi', 'Italian', 'Chinese', 'Pizza', 'Mexican' ]
-  validates :deal_type, inclusion: ['Free', 'Buy one Get one Free', 'Buy one Get one Half Off']
-  geocoded_by :address
+  validate         :validate_address
+  validates        :phone_number, phony_plausible: true
+  validates        :food_type, inclusion: ['Breakfast', 'Sandwiches', 'Sushi', 'Italian', 'Chinese', 'Pizza', 'Mexican' ]
+  validates        :deal_type, inclusion: ['Free', 'Buy one Get one Free', 'Buy one Get one Half Off']
+  geocoded_by      :address
   after_validation :geocode
 
   def validate_address
