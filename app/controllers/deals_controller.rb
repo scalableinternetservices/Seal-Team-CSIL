@@ -7,10 +7,10 @@ class DealsController < ApplicationController
     deal.user_id = current_user.id
     deal.save!
     flash[:success] = "Deal has been created!"
-    redirect_to "/users/#{current_user.id}/deals"
+    redirect_to "/users/#{:id}/deals"
     rescue
       flash[:error] = "Something went wrong in creating the deal!"
-      redirect_to "/users/#{current_user.id}/deals"
+      redirect_to "/users/#{:id}/deals"
   end 
 
   def new
@@ -35,21 +35,20 @@ class DealsController < ApplicationController
     deal.update(deals_params)
     deal.save!
     flash[:success] = "Deal has been created!"
-    redirect_to "/users/#{current_user.id}/deals"
-  rescue
-    flash[:error] = "Something went wrong in editing the deal!"
-    redirect_to "/users/#{current_user.id}/deals"
+    redirect_to "/users/#{:id}/deals"
+    rescue
+      flash[:error] = "Something went wrong in editing the deal!"
+      redirect_to "/users/#{:id}/deals"
   end
 
   def destroy
     deal = Deal.find_by(:id => params[:deal_id])
-    if deal.destroy!
-      flash[:success] = "Your deal has been destroyed."
-      redirect_to "/users/#{params[:user_id]}/deals"
-    else
+    deal.destroy!
+    flash[:success] = "Your deal has been destroyed."
+    redirect_to "/users/#{:id}/deals"
+    rescue
       flash[:error] = "Something went wrong. Change this when specific validations are created."
-      redirect_to "/users/#{params[:user_id]}/deals"
-    end
+      redirect_to "/users/#{:id}/deals"
   end
 
   private
