@@ -36,14 +36,21 @@ function initMap(mapOptions) {
     handler = Gmaps.build('Google');
     handler.buildMap({ provider: mapOptions, internal: {id: 'map_canvas'}}, function(){
         getMarkers(handler.getMap().getCenter().A, handler.getMap().getCenter().F).done(function(result) {
-            console.log(result);
-            handler.addMarkers(result)
+            result.map(function(m){
+                marker = handler.addMarker(m);
+                google.maps.event.addListener(marker.getServiceObject(), 'click', function(){
+                    console.log('click');
+                });
+            });
         });
         google.maps.event.addListener(handler.getMap(), 'idle', function() {
-            console.log(handler.getMap().getCenter());
             getMarkers(handler.getMap().getCenter().A, handler.getMap().getCenter().F).done(function (result) {
-                console.log(result);
-                handler.addMarkers(result)
+                result.map(function(m){
+                    marker = handler.addMarker(m);
+                    google.maps.event.addListener(marker.getServiceObject(), 'click', function(){
+                        console.log('click');
+                    });
+                });
             });
         });
     });
