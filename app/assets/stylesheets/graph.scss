@@ -23,35 +23,35 @@
   text-align: center;
 }
 
-.map_container .side_bar {
-    position: fixed;
+
+.side_bar {
+    position: relative;
     width: 15%;
     height: 60%;
     top: 20%;
     right: 75%;
     bottom: 30%;
     left: 10%;
-    margin: 0;
-    padding: 0;
-    background-color: #006600; // green
+
+    background-color: #AAAAAA // grey - just used to tmporarily display size
 }
 
-/*
-.side_bar_container {
-    position: relative;
+.side_bar_button {
     width: 100%;
-}    
-   
-    
-.side_bar_container .side_bar {
-    position: fixed;
-    width: 15%;
-    top: 20%;
-    right: 75%;
-    bottom: 30%;
-    left: 10%;
-    margin: 0;
-    padding: 0;
-    background-color: #6495ed;
+    padding: 10px;
+    color: #111111;        // black - color of text on buttons
+    background: #CCCCCC;   // grey  - color of the actual button
+    border-color: #111111; // black
+    border-radius: 8px;    // round edges
 }
-*/
+
+.side_bar_dropdown {
+    padding-left: 20%;
+    background-color: #CCCCCC; // grey
+}
+
+// display a color when hovering over the buttons
+.side_bar_button:hover, .side_bar_dropdown:hover {
+    cursor: pointer;
+    background-color: #EEEEEE; // light grey
+}

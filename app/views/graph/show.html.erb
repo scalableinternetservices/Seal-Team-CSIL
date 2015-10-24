@@ -17,8 +17,36 @@
 
 <div class="map_container">
     <div id="map_canvas" class="map_canvas"></div>
-    <div id="side_bar" class="side_bar">side_bar in map container</div>
 </div>
+
+<div class="side_bar">
+    <button id="b1" class="side_bar_button" >Button 1</button>
+    <button id="b2" class="side_bar_button" >Button 2</button>
+
+<!-- NEED TO FIX -->
+<!-- Need to set the variable clicked from the dropdown menu to the food type
+  -->
+    <div class="dropdown">
+        <button id="side_bar_food_type" class="side_bar_button" type="button" data-toggle="dropdown">Food Type
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu" border="none">
+            <li type="button" onclick="myFunction( 'Asian' )" class="side_bar_dropdown">Asian</li>
+            <li type="button" onclick="myFunction( 'American' )" class="side_bar_dropdown">American</li>
+            <li type="button" onclick="myFunction( 'French' )" class="side_bar_dropdown">French</li>
+            <li type="button" onclick="myFunction( 'Italian' )" class="side_bar_dropdown">Italian</li>
+            <li type="button" onclick="myFunction( 'Mexican' )" class="side_bar_dropdown">Mexican</li>
+        </ul>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    function myFunction( s ) {
+
+        document.getElementById( "side_bar_food_type" ).innerHTML = s + '<span class="caret"></span>';
+    }
+
+</script>
 
 <script type="text/javascript">
     <% if @lat.present? && @lng.present?%>
