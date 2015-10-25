@@ -54,7 +54,6 @@ class DealsController < ApplicationController
 
   def update_view_count
     render :nothing => true
-    puts 'Updating View'
     deal = Deal.find_by(:id => params[:deal_id])
     deal.update!(views: deal.views + 1)
   end
@@ -63,7 +62,7 @@ class DealsController < ApplicationController
   private
 
     def deals_params
-      params.require(:deal).permit(:food_name, :description, :address, :deal_type, :start_time, :end_time, :food_type)
+      params.require(:deal).permit(:food_name, :description, :address, :deal_type, :start_time, :end_time, :food_type, :avatar)
     end
 
 end
