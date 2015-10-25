@@ -24,11 +24,11 @@ ActiveRecord::Schema.define(version: 20151024205824) do
     t.string   "food_type"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "views"
-    t.integer  "shares"
-    t.integer  "purchases"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "views",       default: 0
+    t.integer  "shares",      default: 0
+    t.integer  "purchases",   default: 0
   end
 
   create_table "users", force: :cascade do |t|

@@ -31,6 +31,14 @@ function getMarkers(lat, lng){
         dataType: 'json'
     });
 }
+function updateCount(deal_id, count_type){
+    $.ajax({
+        url: "deals/update_" + count_type + "_count",
+        type: "PATCH",
+        data: {deal_id: deal_id},
+        dataType: 'json'
+    });
+}
 function initMap(mapOptions) {
     console.log("building map");
     handler = Gmaps.build('Google');
@@ -39,7 +47,9 @@ function initMap(mapOptions) {
             result.map(function(m){
                 marker = handler.addMarker(m);
                 google.maps.event.addListener(marker.getServiceObject(), 'click', function(){
-                    console.log('click');
+                    //TODO: Clean up HTML parsing
+                    var deal_id = m.infowindow.split("deal_id: ").pop().split('<')[0];
+                    updateCount(deal_id, 'view');
                 });
             });
         });
@@ -48,7 +58,9 @@ function initMap(mapOptions) {
                 result.map(function(m){
                     marker = handler.addMarker(m);
                     google.maps.event.addListener(marker.getServiceObject(), 'click', function(){
-                        console.log('click');
+                        //TODO: Clean up HTML parsing
+                        var deal_id = m.infowindow.split("deal_id: ").pop().split('<')[0];
+                        updateCount(deal_id, 'view');
                     });
                 });
             });

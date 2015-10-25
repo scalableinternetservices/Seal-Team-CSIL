@@ -1,9 +1,9 @@
 class DealsController < ApplicationController
 
-  before_filter :authorize, :only => [:create, :new, :show, :edit, :update, :destroy]
+  before_filter :authorize, :only => [:create, :new, :show, :edit, :update, :destroy, :update_view_count]
 
   def create
-    deal = Deal.new(deals_params)
+    deal = Deal.new(deals_params, views: 0, shares: 0, purhases: 0)
     deal.user_id = current_user.id
     deal.save!
     flash[:success] = "Deal has been created!"
@@ -52,10 +52,18 @@ class DealsController < ApplicationController
     
   end
 
+  def update_view_count
+    render :nothing => true
+    puts 'Updating View'
+    deal = Deal.find_by(:id => params[:deal_id])
+    deal.update!(views: deal.views + 1)
+  end
+
+
   private
 
     def deals_params
-      params.require(:deal).permit(:food_name, :description, :address, :deal_type, :start_time, :end_time, :food_type)
+      params.require(:deal).permit(:food_name, :description, :address, :deal_type, :start_time, :end_time, :food_type, :avatar)
     end
 
 end
