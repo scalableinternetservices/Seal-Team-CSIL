@@ -34,7 +34,7 @@ class DealsController < ApplicationController
     deal = Deal.find_by(:id => params[:deal_id])
     deal.update(deals_params)
     deal.save!
-    flash[:success] = "Deal has been created!"
+    flash[:success] = "Deal has been updated!"
     redirect_to "/users/#{current_user.id}/deals"
   rescue
     flash[:error] = "Something went wrong in editing the deal!"
