@@ -1,5 +1,5 @@
  <h1 class='center'> New Account </h1>
-  <%= form_for :user, :html => {:class => "form-horizontal"}, url: '/users#create' do |f| %>
+  <%= form_for :user, :html => {:class => "form-horizontal"}, url: create_user_path do |f| %>
     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
       <%= f.label :name, "Name:" %>
       <%= f.text_field :name, class: "form-control" %>

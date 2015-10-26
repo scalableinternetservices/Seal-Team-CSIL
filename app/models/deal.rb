@@ -12,7 +12,7 @@ class Deal < ActiveRecord::Base
 
   def validate_address
     if StreetAddress::US.parse(address).nil?
-      errors.add(address, "Need a valid email address")
+      errors.add(address, "Need a valid address")
     end
   end
 

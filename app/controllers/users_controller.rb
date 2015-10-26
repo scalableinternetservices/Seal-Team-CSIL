@@ -24,10 +24,10 @@ class UsersController < ApplicationController
     user.save!
     session[:user_id] = user.id
     flash[:success] = "Your information has been updated."
-    redirect_to "/"
+    redirect_to show_user_path
     rescue
-      flash[:error] = "Something went wrong. Change this when specific validations are created."
-      redirect_to "/users/#{:id}"
+      flash[:error] = "Something went wrong while updating your account."
+      redirect_to edit_user_path
   end
 
   def create
@@ -35,10 +35,10 @@ class UsersController < ApplicationController
     user.save!
     session[:user_id] = user.id
     flash[:success] = "Account has been created!"
-    redirect_to "/"
+    redirect_to show_user_path
     rescue
       flash[:error] = "Something went wrong in creating the account!"
-      redirect_to '/signup'
+      redirect_to new_user_path
   end
 
   private

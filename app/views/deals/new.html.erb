@@ -1,5 +1,5 @@
  <h1 class='center'> New Deal </h1>
-  <%= form_for :deal, :html => {:class => "form-horizontal"}, url: '/users/:id/create_deal' do |f| %>
+  <%= form_for :deal, :html => {:class => "form-horizontal"}, url: create_deal_path do |f| %>
     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
       <%= f.label :food_name, "Food Name:" %>
       <%= f.text_field :food_name, class: "form-control" %>
