@@ -3,7 +3,7 @@ class DealsController < ApplicationController
   before_filter :authorize, :only => [:create, :new, :show, :edit, :update, :destroy, :update_view_count]
 
   def create
-    deal = Deal.new(deals_params, views: 0, shares: 0, purhases: 0)
+    deal = Deal.new(deals_params, views: 0, shares: 0, purchases: 0)
     deal.user_id = current_user.id
     deal.save!
     flash[:success] = "Deal has been created!"
@@ -49,7 +49,6 @@ class DealsController < ApplicationController
     rescue
       flash[:error] = "Something went wrong. Change this when specific validations are created."
       redirect_to "/users/#{params[:user_id]}/deals"
-    
   end
 
   def update_view_count
@@ -57,7 +56,6 @@ class DealsController < ApplicationController
     deal = Deal.find_by(:id => params[:deal_id])
     deal.update!(views: deal.views + 1)
   end
-
 
   private
 
