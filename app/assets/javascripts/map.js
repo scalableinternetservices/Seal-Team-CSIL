@@ -31,19 +31,38 @@ function getMarkers(lat, lng){
         dataType: 'json'
     });
 }
+function updateCount(deal_id, count_type){
+    $.ajax({
+        url: "deals/update_" + count_type + "_count",
+        type: "PATCH",
+        data: {deal_id: deal_id},
+        dataType: 'json'
+    });
+}
 function initMap(mapOptions) {
     console.log("building map");
     handler = Gmaps.build('Google');
     handler.buildMap({ provider: mapOptions, internal: {id: 'map_canvas'}}, function(){
         getMarkers(handler.getMap().getCenter().A, handler.getMap().getCenter().F).done(function(result) {
-            console.log(result);
-            handler.addMarkers(result)
+            result.map(function(m){
+                marker = handler.addMarker(m);
+                google.maps.event.addListener(marker.getServiceObject(), 'click', function(){
+                    //TODO: Clean up HTML parsing
+                    var deal_id = m.infowindow.split("deal_id: ").pop().split('<')[0];
+                    updateCount(deal_id, 'view');
+                });
+            });
         });
         google.maps.event.addListener(handler.getMap(), 'idle', function() {
-            console.log(handler.getMap().getCenter());
             getMarkers(handler.getMap().getCenter().A, handler.getMap().getCenter().F).done(function (result) {
-                console.log(result);
-                handler.addMarkers(result)
+                result.map(function(m){
+                    marker = handler.addMarker(m);
+                    google.maps.event.addListener(marker.getServiceObject(), 'click', function(){
+                        //TODO: Clean up HTML parsing
+                        var deal_id = m.infowindow.split("deal_id: ").pop().split('<')[0];
+                        updateCount(deal_id, 'view');
+                    });
+                });
             });
         });
     });

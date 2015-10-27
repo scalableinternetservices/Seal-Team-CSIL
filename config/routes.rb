@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   patch '/users/:user_id/deals/:deal_id' => 'deals#update', as: 'update_deal'
   delete '/users/:user_id/deals/:deal_id' => 'deals#destroy', as: 'delete_deal'
 
+  patch '/deals/update_view_count' => 'deals#update_view_count'
+
   get '/signup' => 'users#new'
   post '/users' => 'users#create'
 
