@@ -2,8 +2,8 @@ class User < ActiveRecord::Base
 
   has_many :deals, dependent: :destroy
   
-  validates         :name, :address, :phone_number, :hours, presence: true
-  validate          :validate_address
+  validates         :name, :address, :password, :password_confirmation, presence: true
+  # validate          :validate_address
   validates         :email, email: true
   validates         :phone_number, phony_plausible: true
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }
@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   
   def validate_address
     if StreetAddress::US.parse(address).nil?
-      errors.add(address, "Need a valid email address")
+      errors.add(address, "Need a valid address")
     end
   end
   

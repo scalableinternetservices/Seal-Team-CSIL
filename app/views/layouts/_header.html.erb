@@ -1,0 +1,20 @@
+<nav class="navbar navbar-inverse" style="background:#23233E">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href='/'>Isla Vista Food Finder</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li><a href='/'>Map View</a></li>
+        <li><a href='/timeline'>Timeline View</a></li>
+        <% if current_user %>
+          <li><%= link_to current_user.name + "'s Home", show_user_path(current_user) %></li> 
+          <li><%= link_to "Logout", '/logout' %></li> 
+        <% else %>
+          <li><%= link_to 'Login', '/login' %></li> 
+          <li><%= link_to 'Signup', '/signup' %></li> 
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
