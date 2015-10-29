@@ -11,11 +11,90 @@
 <h1 class='center'> Hello, you have reached the home page! </h1>
 
 <!-- <div style='width: 1000px;'>
-  <div id="map" style='width: 1000px; height: 400px; background-position: center;'></div>
+    <div id="map" style='width: 1000px; height: 400px; background-position: center;'></div>
 </div> -->
+
 <div class="map_container">
-  <div id="map_canvas" class="map_canvas"></div>
+    <div id="map_canvas" class="map_canvas"></div>
 </div>
+
+
+
+<!-- Side Bar -->
+<div class="side_bar">
+    
+<!-- Filters -->
+<!--    <h3 style="min-height: 60px; text-align: center" >Filters:</h3> -->
+    <h3 class="side_bar_item" style="text-align: center" >Filters:</h3>
+
+<!-- Empty Side Bar Item -->    
+    <li class="side_bar_item"></li>
+
+    
+<!-- Food Type -->
+    <div class="dropdown">
+        <button id="food_type" class="side_bar_button" type="button" data-toggle="dropdown">Food Type
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu" border="none">
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Food Type', 'food_type' )">Food Type</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Asian', 'food_type' )">Asian</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'American', 'food_type' )">American</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'French', 'food_type' )">French</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Italian', 'food_type' )">Italian</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Mexican', 'food_type' )">Mexican</li>
+        </ul>
+    </div>    
+
+
+<!-- Day Of Week -->
+    <div class="dropdown">
+        <button id="day_of_week" class="side_bar_button" type="button" data-toggle="dropdown">Day Of Week
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu" border="none">
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Day Of Week', 'day_of_week' )">Day Of Week</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Sunday', 'day_of_week' )">Sunday</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Monday', 'day_of_week' )">Monday</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Tuesday', 'day_of_week' )">Tuesday</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Wednesday', 'day_of_week' )">Wednesday</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Thursday', 'day_of_week' )">Thursday</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Friday', 'day_of_week' )">Friday</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Saturday', 'day_of_week' )">Saturday</li>
+        </ul>
+    </div>
+    
+    
+<!-- Deal Type -->
+    <div class="dropdown">
+        <button id="deal_type" class="side_bar_button" type="button" data-toggle="dropdown">Deal Type
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu" border="none">
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Deal Type', 'deal_type' )">Deal Type</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Stub 1', 'deal_type' )">Stub 1</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Stub 2', 'deal_type' )">Stub 2</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Stub 3', 'deal_type' )">Stub 3</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Stub 4', 'deal_type' )">Stub 4</li>
+        </ul>
+    </div>    
+    
+<!-- Radius -->
+    <form id="radius" class="side_bar_item">Radius: <input type="text" placeholder="miles" style="color: black; width: 50px"></input>
+    </form>
+    
+<!-- Empty Side Bar Item -->    
+    <li class="side_bar_item"></li>
+    
+<!-- Update Map -->
+    <button id="update_map" class="side_bar_button">Update Map</button>
+    
+</div>
+
+
+<!-- Sets the variable in the dropdown menu to the value selected -->
+<script type="text/javascript">
+    function setDropDownName( s, id ) {
+        document.getElementById( id ).innerHTML = s + ' <span class="caret"></span>';
+    }
+</script>
 
 <script type="text/javascript">
     <% if @lat.present? && @lng.present?%>
