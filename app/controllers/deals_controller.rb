@@ -35,11 +35,7 @@ class DealsController < ApplicationController
     deal.update(deals_params)
     deal.save!
     flash[:success] = "Deal has been updated!"
-<<<<<<< HEAD
-    redirect_to "/users/#{params[:user_id]}/deals"
-=======
     redirect_to "/users/#{current_user.id}/deals"
->>>>>>> master
   rescue
     flash[:error] = "Something went wrong in editing the deal!"
     redirect_to "/users/#{params[:user_id]}/deals"
@@ -51,20 +47,14 @@ class DealsController < ApplicationController
     flash[:success] = "Your deal has been deleted."
     redirect_to "/users/#{current_user.id}/deals#show"
     rescue
-<<<<<<< HEAD
       flash[:error] = "Something went wrong when deleting the deal."
       redirect_to "/users/#{current_user.id}/deals#show"
-    
-=======
-      flash[:error] = "Something went wrong. Change this when specific validations are created."
-      redirect_to "/users/#{params[:user_id]}/deals"
   end
 
   def update_view_count
     render :nothing => true
     deal = Deal.find_by(:id => params[:deal_id])
     deal.update!(views: deal.views + 1)
->>>>>>> master
   end
 
   private
