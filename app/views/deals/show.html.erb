@@ -8,7 +8,8 @@
       <th> Deal Type </th>
       <th> Start Time </th>
       <th> End Time </th>
-      <th> Foot Type </th>
+      <th> Food Type </th>
+      <th> Views </th>
       <th> Edit </th>
       <th> Delete </th>
     </tr>
@@ -21,6 +22,7 @@
         <td> <%= deal.start_time.strftime("%B %d, %Y at %I:%M%p %Z") %> </td>
         <td> <%= deal.end_time.strftime("%B %d, %Y at %I:%M%p %Z") %> </td>
         <td> <%= deal.food_type %></td>
+        <td> <%= deal.views %></td>
         <td> <%= link_to "Edit This Deal", edit_deal_path(user_id: current_user.id, deal_id: deal.id) %> </td>
         <td> <%= link_to "Delete This Deal", delete_deal_path(user_id: current_user.id, deal_id: deal.id), method: "delete" %> </td>
       </tr>
