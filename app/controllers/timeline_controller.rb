@@ -2,20 +2,30 @@ class TimelineController < ApplicationController
 
   def show
     # Render timeline and pass all necessary info to the view.
-    @user = User.find_by(id: params[:id])
-    @deals = @user.deals
+    @deals_within_proximity = []
+    @lat = Rails.cache.fetch('lat').to_f
+    @lng = Rails.cache.fetch('lng').to_f
+    @distance_miles = 10
+    distance_meters = @distance_miles * 1609.34
+    Deal.all.each do |deal|
+    	if coordinate_distance([deal.latitude, deal.longitude],[@lat,@lng]) <= distance_meters
+  			@deals_within_proximity.append(deal)
+  		end
+    end
     render 'show'
   end
 
   def load_deals
-  	distance_meters = params[:distance_from_address] * 1609.34
+  	@distance_miles = params[:distance_from_address].to_f()
+  	distance_meters = @distance_miles  * 1609.34
   	location = Geocoder.search(params[:street_address])
-  	lat = location[0].latitude
-  	lng = location[0].longitude
-  	@deals_within_proximity = []
+    @deals_within_proximity = []
+  	@lat = location[0].latitude
+  	@lng = location[0].longitude
   	Deal.all.each do |deal|
-  		if coordinate_distance([deal.latitude, deal.longitude],[lat,lng]) <= distance_meters
+  		if coordinate_distance([deal.latitude, deal.longitude],[@lat,@lng]) <= distance_meters
   			@deals_within_proximity.append(deal)
+  		end
   	end
   	render 'show'
   end
