@@ -10,9 +10,8 @@
 		<%= text_field_tag(:distance_from_address, nil, placeholder: 'How close to your address would you like deals to be?',size: 50)%> <br>
 		<%= submit_tag("Search") %>
 	<%end%> <br>
-	Showing deals within <%=@distance_miles.to_i%> mile(s) of
-	<% address = Geocoder.search([@lat,@lng]).first %>
-	<%= address.address %>
+	Showing deals within <%=@distance_miles%> mile(s) of
+	<%= Geocoder.search([@lat,@lng]).first.address %>
 </div>
 
 <div style="width:60%;margin-left: auto;margin-right: auto;">
@@ -39,4 +38,4 @@
 	    <% end %>
 </table>	    
 
-<div>
+</div>
