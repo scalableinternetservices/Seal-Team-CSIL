@@ -1,1 +1,42 @@
-<h1 class='center'> Here is the timeline view </h1>
+<h1 class='center'> Timeline of Deals </h1>
+
+
+<div class = "form-group" style="width:60%;margin-left: auto;margin-right: auto;">
+	Want to see deals within a specific area?<br><br>
+	<%= form_tag('/timeline/load_deals', :method => :get) do %>
+		Address:
+		<%= text_field_tag(:street_address, nil, placeholder: 'Enter an address to localize deals to that area!',size: 50) %> <br>
+		Distance (Miles):
+		<%= text_field_tag(:distance_from_address, nil, placeholder: 'How close to your address would you like deals to be?',size: 50)%> <br>
+		<%= submit_tag("Search") %>
+	<%end%> <br>
+	Showing deals within <%=@distance_miles.to_i%> mile(s) of
+	<% address = Geocoder.search([@lat,@lng]).first %>
+	<%= address.address %>
+</div>
+
+<div style="width:60%;margin-left: auto;margin-right: auto;">
+<table class = "table">
+	<tr> 
+      <th> Food Name </th> 
+      <th> Description </th>
+      <th> Location </th>
+      <th> Deal Type </th>
+      <th> Start Time </th>
+      <th> End Time </th>
+      <th> Food Type </th>
+    </tr>
+	<% @deals_within_proximity.each do |deal| %>
+	      <tr>
+	        <td> <%= deal.food_name %> </td>
+	        <td> <%= deal.description %></td>
+	        <td> <%= deal.address %></td>
+	        <td> <%= deal.deal_type %></td>
+	        <td> <%= deal.start_time.strftime("%B %d, %Y at %I:%M%p %Z") %> </td>
+	        <td> <%= deal.end_time.strftime("%B %d, %Y at %I:%M%p %Z") %> </td>
+	        <td> <%= deal.food_type %></td>
+	      </tr>
+	    <% end %>
+</table>	    
+
+<div>
