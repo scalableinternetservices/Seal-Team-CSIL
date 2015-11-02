@@ -5,7 +5,7 @@ class TimelineController < ApplicationController
     @deals_within_proximity = []
     @lat = Rails.cache.fetch('lat').to_f
     @lng = Rails.cache.fetch('lng').to_f
-    @distance_miles = 10
+    @distance_miles = 5.0
     distance_meters = @distance_miles * 1609.34
     Deal.all.each do |deal|
     	if coordinate_distance([deal.latitude, deal.longitude],[@lat,@lng]) <= distance_meters
@@ -16,6 +16,7 @@ class TimelineController < ApplicationController
   end
 
   def load_deals
+  	
   	@distance_miles = params[:distance_from_address].to_f()
   	distance_meters = @distance_miles  * 1609.34
   	location = Geocoder.search(params[:street_address])
