@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   post '/users' => 'users#create'
 
   get '/timeline' => 'timeline#show'
+  get '/timeline/load_deals' => 'timeline#load_deals', as: 'load_deals'
 
   get "/users/:id" => "users#show", as: 'show_user'
   get "/users/:id/edit" => "users#edit", as: 'edit_user'
@@ -27,5 +28,6 @@ Rails.application.routes.draw do
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
-  
+
+
 end
