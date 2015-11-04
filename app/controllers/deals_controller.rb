@@ -1,7 +1,7 @@
 class DealsController < ApplicationController
 
-  before_filter :authorize, :only => [:create, :new, :show, :edit, :update, :destroy, :update_view_count]
-
+  #before_filter :authorize, :only => [:create, :new, :show, :edit, :update, :destroy, :update_view_count]
+  skip_before_filter :verify_authenticity_token
   def create
     deal = Deal.new(deals_params, views: 0, shares: 0, purchases: 0)
     deal.user_id = current_user.id
