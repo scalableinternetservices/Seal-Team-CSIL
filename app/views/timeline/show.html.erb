@@ -7,27 +7,12 @@
 		Address:
 		<%= text_field_tag :street_address, nil, placeholder: 'Enter an address to localize deals to that area!', size: 50 %> <br>
 		Distance (Miles):
-      <%= select_tag :distance_from_address, options_for_select([ '1',
-                                                      '5',
-                                                      '10',
-                                                      '15',
-                                                      '20',
-                                                      '25',
-                                                      '30',
-                                                      '50',
-                                                      '100'] ),
+      <%= select_tag :distance_from_address, options_for_select( Deal::DISTANCES ),
                      :include_blank => true %>        Deal Type:
-        <%= select_tag :deal_type, options_for_select([ 'Free',
-                                                        'Buy One Get One Free',
-                                                        'Buy One Get One Half Off',
-                                                        'Flash Deal' ] ),
+        <%= select_tag :deal_type, options_for_select( Deal::DEAL_TYPES ),
                        :include_blank => true %>
         Food Type:
-        <%= select_tag :food_type, options_for_select([ 'American',
-                                                        'Mexican',
-                                                        'Italian',
-                                                        'Asian',
-                                                        'French' ] ),
+        <%= select_tag :food_type, options_for_select( Deal::FOOD_TYPES ),
                        :include_blank => true %>
       <%= submit_tag "Search" %>
 	<%end%> <br>

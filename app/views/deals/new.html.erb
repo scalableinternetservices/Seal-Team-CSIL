@@ -17,11 +17,8 @@
 
     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
       <%= f.label :deal_type, "Deal Type:" %>
-      <%= f.collection_select :deal_type, [ 'Free',
-                                            'Buy One Get One Free',
-                                            'Buy One Get One Half Off',
-                                            'Flash Deal' ],
-                              :to_s, :to_s, :include_blank => true, class: "form-control" %>
+      <%= f.collection_select :deal_type, Deal::DEAL_TYPES, :to_s, :to_s,
+                              :include_blank => true, class: "form-control" %>
     </div>
 
     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
@@ -37,12 +34,8 @@
 
     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
       <%= f.label :food_type, "Food Type:" %>
-      <%= f.collection_select :food_type, [ 'American',
-                                            'Mexican',
-                                            'Italian',
-                                            'Asian',
-                                            'French'],
-                          :to_s, :to_s, :include_blank => true, class: "form-control" %>
+      <%= f.collection_select :food_type, Deal::FOOD_TYPES, :to_s, :to_s,
+                              :include_blank => true, class: "form-control" %>
     </div>
     <%= f.submit "Submit", class: "btn btn-info btn-circle btn-xl", style:"width:30%;display:table;
    margin:0 auto" %>
