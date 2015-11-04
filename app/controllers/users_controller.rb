@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
-  before_filter :authorize, :only => [:show, :edit, :update]
+  # before_filter :authorize, :only => [:show, :edit, :update]
+  skip_before_filter :verify_authenticity_token
 
   def new
     # Render the login view
