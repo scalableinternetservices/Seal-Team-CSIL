@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/users/:user_id/deals/:deal_id' => 'deals#edit', as: 'edit_deal'
   patch '/users/:user_id/deals/:deal_id' => 'deals#update', as: 'update_deal'
   delete '/users/:user_id/deals/:deal_id' => 'deals#destroy', as: 'delete_deal'
+  delete '/users/:user_id/deals' => 'deals#destroy_all', as: 'delete_all_deals'
 
   patch '/deals/update_view_count' => 'deals#update_view_count'
 

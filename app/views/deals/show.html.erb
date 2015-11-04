@@ -1,4 +1,8 @@
 <h1> Current Deals </h1>
+<div>
+  Total Deals: <br>
+  <%= link_to "Delete All", delete_all_deals_path(user_id: current_user.id), method: "delete" %> 
+</div>
 <div class="table-responsive">
   <table class="table">
     <tr> 
