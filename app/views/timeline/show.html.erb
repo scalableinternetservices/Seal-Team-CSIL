@@ -1,24 +1,23 @@
 <h1 class='center'> Timeline of Deals </h1>
 
 
-<div class = "form-group" style="width:60%;margin-left: auto;margin-right: auto;">
-	Want to see deals within a specific area?<br><br>
+<div class = "form-group" style="width:75%;margin-left: auto;margin-right: auto;">
+	<b>Filter your results:</b><br><br>
   <%= form_tag('/timeline/load_deals', :method => :get) do %>
-		Address:
-		<%= text_field_tag :street_address, nil, placeholder: 'Enter an address to localize deals to that area!', size: 50 %> <br>
-		Distance (Miles):
-      <%= select_tag :distance_from_address, options_for_select( Deal::DISTANCES ),
-                     :include_blank => true %>        Deal Type:
+		<b>Address:</b>
+		<%= text_field_tag :street_address, nil, placeholder: '910 Embarcadero del Norte, Isla Vista, CA 93117', size: 50 %>
+        <b>Distance (Miles):</b>
+        <%= select_tag :distance_from_address, options_for_select( Deal::DISTANCES ),
+                     :include_blank => "-" %>
+        <b>Deal Type:</b>
         <%= select_tag :deal_type, options_for_select( Deal::DEAL_TYPES ),
-                       :include_blank => true %>
-        Food Type:
+                       :include_blank => "-" %>
+        <b>Food Type:</b>
         <%= select_tag :food_type, options_for_select( Deal::FOOD_TYPES ),
-                       :include_blank => true %>
-      <%= submit_tag "Search" %>
-      <%= link_to "Reset", reset_deals_path %>
-	<%end%> <br>
-	Showing deals within <%=@distance_miles%> mile(s) of
-	<%= Geocoder.search([@lat,@lng]).first.address %>
+                       :include_blank => "-" %>
+      <br> <br>
+      <p class = 'center' ><%= submit_tag "Search" %><%= link_to "Reset", reset_deals_path %></p>
+	<%end%>
 </div>
 
 <div style="width:80%;margin-left: auto;margin-right: auto;">
