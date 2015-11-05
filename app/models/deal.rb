@@ -28,7 +28,7 @@ class Deal < ActiveRecord::Base
   #only validates accurate address format, not if its a non-real address
   
   # validate         :validate_street_address
-  validates        :deal_type, inclusion: [ 'Free', 'Buy one Get one Free', 'Buy one Get one Half Off' ]
+  validates        :deal_type, inclusion: [ 'Free','Buy One Get One Free','Buy One Get One Half Off','Flash Deal' ]
   geocoded_by      :address
   after_validation :geocode
 
