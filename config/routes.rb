@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get  "/graph/load_local_deals"
   post "/graph/save_user_location"
+  get  "/graph/load_filter_deals" => 'graph#load_filter_deals'
 
   post '/users/:id/create_deal/' => 'deals#create', as: 'create_deal'
   get '/users/:id/create_deal/' => 'deals#new', as: 'new_deal'
@@ -19,6 +20,8 @@ Rails.application.routes.draw do
   post '/users' => 'users#create'
 
   get '/timeline' => 'timeline#show'
+  get '/timeline/load_deals' => 'timeline#load_deals', as: 'load_deals'
+  get '/timeline/reset_deals' => 'timeline#reset_deals', as: 'reset_deals'
 
   get "/users/:id" => "users#show", as: 'show_user'
   get "/users/:id/edit" => "users#edit", as: 'edit_user'
@@ -27,5 +30,6 @@ Rails.application.routes.draw do
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
-  
+
+
 end

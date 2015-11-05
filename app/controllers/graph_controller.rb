@@ -33,6 +33,36 @@ class GraphController < ApplicationController
     Rails.cache.fetch('lng') {params[:lng]}
   end
 
+  def load_filter_deals
+    console.log( 'fail' )
+    # @distance_miles = distance.to_f()
+    # distance_meters = @distance_miles  * 1609.34
+    # location = Geocoder.search(street_address)
+    # @deals_within_proximity = []
+    # @lat = location[0].latitude
+    # @lng = location[0].longitude
+    #
+    # deals = Deal.all
+    # hash = Gmaps4rails.build_markers(deals) do |deal, marker|
+    #   if deal.latitude.present?
+    #     if coordinate_distance([lat,lng],[deal.latitude, deal.longitude]) < distance_meters
+    #       if deal.deal_type == deal_type
+    #         if deal.food_type == food_type
+    #           marker.lat deal.latitude
+    #           marker.lng deal.longitude
+    #           marker.infowindow createInfoWindow(deal)
+    #         end
+    #       end
+    #     end
+    #   end
+    # end
+    # puts hash.to_json
+    # respond_to do |format|
+    #   format.json { render :json => hash, :layout => false}
+    # end
+  end
+
+
   private
 
   def coordinate_distance(loc1, loc2)
@@ -53,4 +83,5 @@ class GraphController < ApplicationController
 
     rm * c # Delta in meters
   end
+
 end

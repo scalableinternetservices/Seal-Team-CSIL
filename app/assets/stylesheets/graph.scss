@@ -9,14 +9,71 @@
 }
 .map_container .map_canvas{
     position: absolute;
-    top: 5%;
-    right: 10%;
-    bottom: 10%;
-    left: 10%;
+    top: 0;
+    right: 50px;
+    left: 250px;
+    bottom: 30%;
+    min-width: 500px;
+    min-height: 281px; // Ratio 16:9
     margin: 0;
     padding: 0;
 }
 
 .center {
-  text-align: center;
+    margin-left: 350px;
+    margin-right: 150px;
+    text-align: center;
+}
+
+// Only change these colors to modify the color scheme
+.side_bar_color_scheme {
+    background-color: #444444; // green
+    border-color: #135C4E;     // darker green
+    color: #FFFFFF;            // white - color of text on buttons
+}
+
+.side_bar_color_scheme_hover {
+    background-color: #357E70; // lighter green
+}
+
+.bg_color {
+    background: #5AA890; // color of the whole page
+}
+
+.side_bar {
+    @extend .side_bar_color_scheme;
+    position: absolute;
+    left: 0;
+    top: 52px;
+    bottom: -25%; // so scrolling will not see bottom
+    width: 200px;
+}
+
+.side_bar_item {
+    @extend .side_bar_color_scheme;
+    width: 100%;
+    padding: 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.side_bar_button {
+    @extend .side_bar_item;
+} .side_bar_button:hover {
+    @extend .side_bar_color_scheme_hover;
+    cursor: pointer;
+    border-radius: 8px;    // round edges
+}
+
+.side_bar_dropdown {
+    color: black;
+    width: 100%;
+    padding-left: 20%;
+} .side_bar_dropdown:hover {
+    cursor: pointer;
+    border-radius: 4px;    // round edges
+    background-color: #DDDDDD; // light grey
 }

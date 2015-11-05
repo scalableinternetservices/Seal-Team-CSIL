@@ -1,1 +1,47 @@
-<h1 class='center'> Here is the timeline view </h1>
+<h1 class='center'> Timeline of Deals </h1>
+
+
+<div class = "form-group" style="width:75%;margin-left: auto;margin-right: auto;">
+	<b>Filter your results:</b><br><br>
+  <%= form_tag('/timeline/load_deals', :method => :get) do %>
+		<b>Address:</b>
+		<%= text_field_tag :street_address, nil, placeholder: '910 Embarcadero del Norte, Isla Vista, CA 93117', size: 50 %>
+        <b>Distance (Miles):</b>
+        <%= select_tag :distance_from_address, options_for_select( Deal::DISTANCES ),
+                     :include_blank => "-" %>
+        <b>Deal Type:</b>
+        <%= select_tag :deal_type, options_for_select( Deal::DEAL_TYPES ),
+                       :include_blank => "-" %>
+        <b>Food Type:</b>
+        <%= select_tag :food_type, options_for_select( Deal::FOOD_TYPES ),
+                       :include_blank => "-" %>
+      <br> <br>
+      <p class = 'center' ><%= submit_tag "Search" %><%= link_to "Reset", reset_deals_path %></p>
+	<%end%>
+</div>
+
+<div style="width:80%;margin-left: auto;margin-right: auto;">
+<table class = "table">
+	<tr> 
+      <th> Food Name </th> 
+      <th> Description </th>
+      <th> Location </th>
+      <th> Deal Type </th>
+      <th> Start Time </th>
+      <th> End Time </th>
+      <th> Food Type </th>
+    </tr>
+	<% @deals_within_proximity.each do |deal| %>
+	      <tr>
+	        <td> <%= deal.food_name %> </td>
+	        <td> <%= deal.description %></td>
+	        <td> <%= deal.address %></td>
+	        <td> <%= deal.deal_type %></td>
+	        <td> <%= deal.start_time.strftime("%B %d, %Y at %I:%M%p %Z") %> </td>
+	        <td> <%= deal.end_time.strftime("%B %d, %Y at %I:%M%p %Z") %> </td>
+	        <td> <%= deal.food_type %></td>
+	      </tr>
+	    <% end %>
+</table>	    
+
+</div>
