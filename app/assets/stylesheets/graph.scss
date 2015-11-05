@@ -10,19 +10,12 @@
 
 .map_container .map_canvas{
     position: absolute;
-<<<<<<< HEAD
-    top: 5%;
-    right: 10%;
-    bottom: 10%;
-    left: 10%;
-=======
     top: 0;
     right: 150px;
     left: 150px;
     bottom: 30%;
     min-width: 500px;
     min-height: 281px; // Ratio 16:9
->>>>>>> 95dbed5798bc54af5e000c2c92aa113a27a79b99
     margin: 0;
     padding: 0;
 }

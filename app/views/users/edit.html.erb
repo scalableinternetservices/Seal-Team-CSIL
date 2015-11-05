@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-  <h1 class='center'> Edit Account </h1>
-  <%= form_for :user, :html => {:class => "form-horizontal"}, url: update_user_path, method: :patch do |f| %>
-=======
+
  <h1 class='center'> Edit Profile </h1>
   <%= form_for :user, :html => {:class => "form-horizontal", method: "patch"}, url: update_user_path do |f| %>
->>>>>>> 95dbed5798bc54af5e000c2c92aa113a27a79b99
     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
       <%= f.label :name, "Name:" %>
       <%= f.text_field :name, class: "form-control" %>
@@ -15,15 +11,9 @@
       <%= f.text_field :email, class: "form-control" %>
     </div>
     
-<<<<<<< HEAD
-     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
-      <%= f.label :password, "Password:" %>
-      <%= f.password_field :password, class: "form-control" %>
-=======
     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
       <%= f.label :password_digest, "Password:" %>
       <%= f.password_field :password_digest, class: "form-control" %>
->>>>>>> 95dbed5798bc54af5e000c2c92aa113a27a79b99
     </div>
     
     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;padding-bottom:40px;">

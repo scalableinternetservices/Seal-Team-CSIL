@@ -21,28 +21,6 @@ class UsersController < ApplicationController
   def update
     user = User.find_by(:id => params[:id])
     user.update(user_params)
-<<<<<<< HEAD
-    if user.save
-      session[:user_id] = user.id
-      flash[:success] = "Your information has been updated."
-      redirect_to "/"
-    else
-      flash[:error] = "Something went wrong. Change this when specific validations are created."
-      redirect_to "/users/#{:id}"
-    end
-  end
-
-  def create
-    user = User.new(formatted_user_params)
-    if user.save
-      session[:user_id] = user.id
-      flash[:success] = "Account has been created!"
-      redirect_to "/"
-    else
-      flash[:error] = "Something went wrong in creating the account!"
-      redirect_to '/signup'
-    end
-=======
     user.save!
     session[:user_id] = user.id
     flash[:success] = "Your information has been updated."
@@ -61,7 +39,6 @@ class UsersController < ApplicationController
     rescue
       flash[:error] = "Something went wrong in creating the account!"
       redirect_to new_user_path
->>>>>>> 95dbed5798bc54af5e000c2c92aa113a27a79b99
   end
 
   private
