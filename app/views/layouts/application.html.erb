@@ -3,30 +3,24 @@
 <head>
   <title>FoodFinder</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <link rel="stylesheet" href="app.css">
+  <!-- <link rel="stylesheet" href="assets/app.scss"> -->
+  <%= stylesheet_link_tag    'app', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 
 <body class="bg_color">
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href='/'>Isla Vista Food Finder</a>
+  <div id="container">
+    <div id="header">
+      <%= render "layouts/header" %>
     </div>
-    <div>
-      <ul class="nav navbar-nav">
-        <li><a href='/'>Map View</a></li>
-        <li><a href='/timeline'>Timeline View</a></li>
-        <% if current_user %>
-          <li><%= link_to current_user.name + "'s Home", show_user_path(current_user) %></li> 
-          <li><%= link_to "Logout", '/logout' %></li> 
-        <% else %>
-          <li><%= link_to 'Login', '/login' %></li> 
-          <li><%= link_to 'Signup', '/signup' %></li> 
-        <% end %>
-      </ul>
+    <%= render "layouts/flash_messages" %>
+    <div id="content">
+      <%= yield %>
+    </div>
+    <div id="footer">
+      <%= render "layouts/footer" %>
     </div>
   </div>
 </nav>
