@@ -1,6 +1,4 @@
-
-
- <h1 class='center'> User Profile </h1>
+  <h1 class='center'> User Profile </h1>
    <%= form_for :user, :html => {:class => "form-horizontal"}, url: '/users/:id/users#show' do |f| %>
 
     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
@@ -27,16 +25,6 @@
       <%= f.label :phone_number, "Phone Number:" %>
       <%= @user.phone_number %>
     </div>
-
-    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
-      <%= f.label :hours, "Hours:" %>
-      <%= @user.hours %>
-    </div>
-
-    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
-      <%= f.label :delivery, "Delivery?" %>
-      <%= @user.delivery %>
-    </div>
     
     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
       <%= f.label :website, "Website:" %>
@@ -45,10 +33,10 @@
     
     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
       <%= f.label :avatar, "Picture:" %>
-      <%= @user.avatar.url %>
+      <%= image_tag @user.avatar.url, size: "240x150" %>
     </div>
   
   <% end %>
   
-<p class = 'center'> <%= link_to "Home", root_path %> | <%= link_to "Add Food Deal", new_deal_path(@user) %> | <%= link_to "Show Food Deals", show_deals_path(@user) %> | <%= link_to "Edit", edit_user_path(@user) %> </p>
+<p class = 'center'> <%= link_to "Home", root_path %> | <%= link_to "Add Food Deal", new_deal_path(@user) %> | <%= link_to "Show Food Deals", show_deals_path(@user) %> | <%= link_to "Edit Profile", edit_user_path(@user) %> </p>
 

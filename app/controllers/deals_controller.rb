@@ -3,7 +3,7 @@ class DealsController < ApplicationController
   #before_filter :authorize, :only => [:create, :new, :show, :edit, :update, :destroy, :update_view_count]
   skip_before_filter :verify_authenticity_token
   def create
-    deal = Deal.new(deals_params, views: 0, shares: 0, purchases: 0)
+    deal = Deal.new(formatted_deal_params, views: 0, shares: 0, purchases: 0)
     deal.user_id = current_user.id
     deal.save!
     flash[:success] = "Deal has been created!"
@@ -67,6 +67,14 @@ class DealsController < ApplicationController
   end
 
   private
+
+    def formatted_deal_params
+      form_params = params.require(:deal).permit(:food_name, :description, :street_address, :city, :zip_code, :state, :deal_type, :start_time, :end_time, :food_type, :avatar)
+      full_address = form_params[:street_address] + ' ' + form_params[:city] + ' ' + form_params[:zip_code] + ' ' + form_params[:state]
+      form_params.except!('street_address', 'city', 'zip_code', 'state')
+      form_params[:address] = full_address
+      form_params  
+    end
 
     def deals_params
       params.require(:deal).permit(:food_name, :description, :address, :deal_type, :start_time, :end_time, :food_type, :avatar)
