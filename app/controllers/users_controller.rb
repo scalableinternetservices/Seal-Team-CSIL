@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   def create
     puts "name is:\n"
     puts user_params[:street_address]
-    user = User.new(user_params)
+    user = User.new(formatted_user_params)
     if user.save
       session[:user_id] = user.id
       flash[:success] = "Account has been created!"
@@ -48,6 +48,10 @@ class UsersController < ApplicationController
   private
 
     def user_params
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :address, :phone_number, :website, :avatar)
+    end
+
+    def formatted_user_params
       form_params = params.require(:user).permit(:name, :email, :password, :password_confirmation, :street_address, :city, :zip_code, :state, :phone_number, :website, :avatar)
       full_address = form_params[:street_address] + ' ' + form_params[:city] + ' ' + form_params[:zip_code] + ' ' + form_params[:state]
       form_params.except!('street_address', 'city', 'zip_code', 'state')
