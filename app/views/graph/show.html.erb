@@ -21,6 +21,6 @@
     <% if @lat.present? && @lng.present?%>
         getViewerLocation(<%= @lat %>, <%= @lng %>);
     <% else %>
-        findUser();
+        getUserWithNoCache();
     <% end %>
 </script>

@@ -1,27 +1,32 @@
-function findUser(){
+function geolocateUser(){
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
-            var mapOptions = {
-                center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
-                zoom: 16};
-            console.log("got location");
-            $.ajax({
-                url: "graph/save_user_location",
-                type: "POST",
-                data: {lat: position.coords.latitude, lng: position.coords.longitude}
-            });
-            console.log("sent location");
-            initMap(mapOptions)
+            return [position.coords.latitude, position.coords.longitude];
         });
     }
     else {
         alert("Please use a browser that supports HTML5")}
 }
+function getUserWithNoCache(){
+    var location = geolocateUser();
+    saveUserLocation(location[0], location[1]);
+    var mapOptions = {
+        center: new google.maps.LatLng(location[0], location[1]),
+        zoom: 16};
+    initMap(mapOptions, location[0], location[1]);
+}
+function saveUserLocation(lat, lng) {
+    $.ajax({
+        url: "graph/save_user_location",
+        type: "POST",
+        data: {lat: lat, lng: lng}
+    });
+}
 function getViewerLocation(lat, lng){
     var mapOptions = {
         center: new google.maps.LatLng(lat,lng),
         zoom: 16};
-    initMap(mapOptions);
+    initMap(mapOptions, lat, lng);
 }
 function getMarkers(lat, lng){
     return $.ajax({
@@ -39,13 +44,19 @@ function updateCount(deal_id, count_type){
         dataType: 'json'
     });
 }
-function initMap(mapOptions) {
-    console.log("building map");
+function initMap(mapOptions, lat, lng) {
     handler = Gmaps.build('Google');
     handler.buildMap({ provider: mapOptions, internal: {id: 'map_canvas'}}, function(){
+        //Determine if user is in a different location
+        var location = geolocateUser();
+        if(location[0] !== lat || location[1] !== lng){
+            handler.getMap().center = new google.maps.LatLng(location[0], location[1]);
+        }
+        //After getting location
         getMarkers(handler.getMap().getCenter().A, handler.getMap().getCenter().F).done(function(result) {
             result.map(function(m){
                 marker = handler.addMarker(m);
+                //INFO Window Click Listener
                 google.maps.event.addListener(marker.getServiceObject(), 'click', function(){
                     //TODO: Clean up HTML parsing
                     var deal_id = m.infowindow.split("deal_id: ").pop().split('<')[0];
@@ -53,10 +64,12 @@ function initMap(mapOptions) {
                 });
             });
         });
+        //Map Move IDLE Listener
         google.maps.event.addListener(handler.getMap(), 'idle', function() {
             getMarkers(handler.getMap().getCenter().A, handler.getMap().getCenter().F).done(function (result) {
                 result.map(function(m){
                     marker = handler.addMarker(m);
+                    //INFO Window Click Listener
                     google.maps.event.addListener(marker.getServiceObject(), 'click', function(){
                         //TODO: Clean up HTML parsing
                         var deal_id = m.infowindow.split("deal_id: ").pop().split('<')[0];
