@@ -53,4 +53,25 @@ class GraphController < ApplicationController
 
     rm * c # Delta in meters
   end
+
+  def load_path( food_type, day_of_the_week, deal_type, distance )
+    @distance_miles = distance.to_f()
+    distance_meters = @distance_miles  * 1609.34
+    location = Geocoder.search(params[:street_address])
+    @deals_within_proximity = []
+    @lat = location[0].latitude
+    @lng = location[0].longitude
+
+    Deal.all.each do |deal|
+      if coordinate_distance([deal.latitude, deal.longitude],[@lat,@lng]) <= distance_meters
+        if deal.deal_type == params[:deal_type]
+          if deal.food_type == params[:food_type]
+            @deals_within_proximity.append(deal)
+          end
+        end
+      end
+    end
+    render 'show'
+  end
+
 end

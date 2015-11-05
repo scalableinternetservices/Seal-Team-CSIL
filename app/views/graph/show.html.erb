@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- <link href="assets/css/bootstrap-responsive.css" rel="stylesheet"> -->
 <!-- <%= stylesheet_link_tag    'bootstrap-responsive', media: 'all', 'data-turbolinks-track' => true %> -->
-<h1 class='center'> Hello, you have reached the home page! </h1>
+<h1 class='center'> Check out Local Deals! </h1>
 
 <!-- <div style='width: 1000px;'>
     <div id="map" style='width: 1000px; height: 400px; background-position: center;'></div>
@@ -36,7 +36,7 @@
         <button id="food_type" class="side_bar_button" type="button" data-toggle="dropdown">Food Type
         <span class="caret"></span></button>
         <ul class="dropdown-menu" border="none">
-            <li class="side_bar_dropdown" onclick="setDropDownName( 'Food Type', 'food_type' )">Food Type</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Any Type', 'food_type' )">-</li>
             <li class="side_bar_dropdown" onclick="setDropDownName( 'Asian', 'food_type' )">Asian</li>
             <li class="side_bar_dropdown" onclick="setDropDownName( 'American', 'food_type' )">American</li>
             <li class="side_bar_dropdown" onclick="setDropDownName( 'French', 'food_type' )">French</li>
@@ -51,7 +51,7 @@
         <button id="day_of_week" class="side_bar_button" type="button" data-toggle="dropdown">Day Of Week
         <span class="caret"></span></button>
         <ul class="dropdown-menu" border="none">
-            <li class="side_bar_dropdown" onclick="setDropDownName( 'Day Of Week', 'day_of_week' )">Day Of Week</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Everyday', 'day_of_week' )">-</li>
             <li class="side_bar_dropdown" onclick="setDropDownName( 'Sunday', 'day_of_week' )">Sunday</li>
             <li class="side_bar_dropdown" onclick="setDropDownName( 'Monday', 'day_of_week' )">Monday</li>
             <li class="side_bar_dropdown" onclick="setDropDownName( 'Tuesday', 'day_of_week' )">Tuesday</li>
@@ -68,24 +68,40 @@
         <button id="deal_type" class="side_bar_button" type="button" data-toggle="dropdown">Deal Type
         <span class="caret"></span></button>
         <ul class="dropdown-menu" border="none">
-            <li class="side_bar_dropdown" onclick="setDropDownName( 'Deal Type', 'deal_type' )">Deal Type</li>
-            <li class="side_bar_dropdown" onclick="setDropDownName( 'Stub 1', 'deal_type' )">Stub 1</li>
-            <li class="side_bar_dropdown" onclick="setDropDownName( 'Stub 2', 'deal_type' )">Stub 2</li>
-            <li class="side_bar_dropdown" onclick="setDropDownName( 'Stub 3', 'deal_type' )">Stub 3</li>
-            <li class="side_bar_dropdown" onclick="setDropDownName( 'Stub 4', 'deal_type' )">Stub 4</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'All Deals', 'deal_type' )">-</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Free', 'deal_type' )">Free</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Buy One Get One Free', 'deal_type' )">Buy One Get One Free</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Buy One Get One Half Off', 'deal_type' )">Buy One Get One Half Off</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Flash Deal', 'deal_type' )">Flash Deal</li>
         </ul>
     </div>    
     
 <!-- Radius -->
-    <form id="radius" class="side_bar_item">Radius: <input type="text" placeholder="miles" style="color: black; width: 50px"></input>
-    </form>
+    <div class="dropdown">
+        <button id="distance" class="side_bar_button" type="button" data-toggle="dropdown">Distance(Miles)
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu" border="none">
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Everywhere', 'distance' )">-</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( '1', 'distance' )">1</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( '5', 'distance' )">5</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( '10', 'distance' )">10</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( '15', 'distance' )">15</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( '20', 'distance' )">20</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( '25', 'distance' )">25</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( '30', 'distance' )">30</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( '50', 'distance' )">50</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( '100', 'distance' )">100</li>
+        </ul>
+    </div>
+
     
 <!-- Empty Side Bar Item -->    
     <li class="side_bar_item"></li>
     
 <!-- Update Map -->
-    <button id="update_map" class="side_bar_button">Update Map</button>
-    
+  <!--<div class="side_bar_button"><%=link_to "Search", load_deals_path %> </div>-->
+  <button id="update_map" class="side_bar_button" onClick="load_deals">Search</button>
+
 </div>
 
 
@@ -93,6 +109,15 @@
 <script type="text/javascript">
     function setDropDownName( s, id ) {
         document.getElementById( id ).innerHTML = s + ' <span class="caret"></span>';
+    }
+</script>
+
+<script type="text/javascript">
+    function getFilters() {
+        load_deals_path(document.getElementById( food_type ).textContent,
+                        document.getElementById( day_of_the_week ).textContent,
+                        document.getElementById( deal_type ).textContent,
+                        document.getElementById( distance ).textContent );
     }
 </script>
 
