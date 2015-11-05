@@ -32,9 +32,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    puts "name is:\n"
-    puts user_params[:street_address]
-    user = User.new(user_params)
+    user = User.new(formatted_user_params)
     if user.save
       session[:user_id] = user.id
       flash[:success] = "Account has been created!"
