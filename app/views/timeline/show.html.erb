@@ -15,6 +15,7 @@
         <%= select_tag :food_type, options_for_select( Deal::FOOD_TYPES ),
                        :include_blank => true %>
       <%= submit_tag "Search" %>
+      <%= link_to "Reset", reset_deals_path %>
 	<%end%> <br>
 	Showing deals within <%=@distance_miles%> mile(s) of
 	<%= Geocoder.search([@lat,@lng]).first.address %>

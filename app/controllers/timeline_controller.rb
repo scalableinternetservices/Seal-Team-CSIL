@@ -35,6 +35,11 @@ class TimelineController < ApplicationController
   	render 'show'
   end
 
+  def reset_deals
+    @deals_within_proximity = Deal.all
+    render 'show'
+  end
+
   private
 
   def coordinate_distance(loc1, loc2)

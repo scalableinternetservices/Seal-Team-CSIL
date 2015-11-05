@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   get '/timeline' => 'timeline#show'
   get '/timeline/load_deals' => 'timeline#load_deals', as: 'load_deals'
+  get '/timeline/reset_deals' => 'timeline#reset_deals', as: 'reset_deals'
 
   get "/users/:id" => "users#show", as: 'show_user'
   get "/users/:id/edit" => "users#edit", as: 'edit_user'
