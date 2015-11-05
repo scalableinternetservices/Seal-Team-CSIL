@@ -10,48 +10,45 @@
 
   <title>Distributed Footer</title>
 
-<!--   <link rel="stylesheet" href="assets/footer-distributed.scss.css"> -->
   <%= stylesheet_link_tag    'footer-distributed', media: 'all', 'data-turbolinks-track' => true %>
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
 </head>
 
-  <body>
+<body>
 
-    <!-- The content of your page would go here. -->
+<!-- The content of your page would go here. -->
 
-    <footer class="footer-distributed" style>
+<footer class="footer-distributed" style>
 
-      <div class="footer-right">
+  <div class="footer-right">
 
-        <a href="#"><i class="fa fa-facebook"></i></a>
-        <a href="#"><i class="fa fa-twitter"></i></a>
-        <a href="#"><i class="fa fa-linkedin"></i></a>
-        <a href="#"><i class="fa fa-github"></i></a>
+    <a href="http://www.facebook.com/sharer.php?u=<%= request.original_url %>"><i class="fa fa-facebook"></i></a>
+    <a href="https://twitter.com/share?url=<%= request.original_url %>&text=FoodFinderDeal"><i class="fa fa-twitter"></i></a>
+    <a href="https://plus.google.com/share?url=<%= request.original_url %>"><i class="fa fa-google-plus-square"></i></a>
+    <!--<a href="https://pinterest.com/pin/create/bookmarklet/?url=<%= request.original_url %>&description=FoodFinderDeal"><i class="fa fa-pinterest"></i></a>-->
+    <a href="http://reddit.com/submit?url=<%= request.original_url %>&title=FoodFinderDeal"><i class="fa fa-reddit"></i></a>
 
-      </div>
 
-      <div class="footer-left">
+  </div>
 
-        <p class="footer-links">
-          <a href="#">Home</a>
-          ·
-          <a href="#">Blog</a>
-          ·
-          <a href="#">Pricing</a>
-          ·
-          <a href="#">About</a>
-          ·
-          <a href="#">Faq</a>
-          ·
-          <a href="#">Contact</a>
-        </p>
+  <div class="footer-left">
 
-        <p>Company Name &copy; 2015</p>
-      </div>
+    <p class="footer-links">
+      <a href="/">Home</a>
+      ·
+      <a href="#">About</a>
+      ·
+      <a href="#">Faq</a>
+      ·
+      <a href="#">Contact</a>
+    </p>
 
-    </footer>
+    <p>Food Finder &copy; 2015</p>
+  </div>
 
-  </body>
+</footer>
+
+</body>
 
 </html>
