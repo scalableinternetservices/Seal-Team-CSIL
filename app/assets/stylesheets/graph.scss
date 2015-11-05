@@ -10,8 +10,8 @@
 .map_container .map_canvas{
     position: absolute;
     top: 0;
-    right: 150px;
-    left: 150px;
+    right: 50px;
+    left: 250px;
     bottom: 30%;
     min-width: 500px;
     min-height: 281px; // Ratio 16:9
@@ -20,7 +20,7 @@
 }
 
 .center {
-    margin-left: 130px;
+    margin-left: 350px;
     margin-right: 150px;
     text-align: center;
 }
@@ -46,7 +46,7 @@
     left: 0;
     top: 52px;
     bottom: -25%; // so scrolling will not see bottom
-    width: 130px;
+    width: 200px;
 }
 
 .side_bar_item {

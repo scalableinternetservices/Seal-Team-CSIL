@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get  "/graph/load_local_deals"
   post "/graph/save_user_location"
+  get  "/graph/load_filter_deals" => 'graph#load_filter_deals'
 
   post '/users/:id/create_deal/' => 'deals#create', as: 'create_deal'
   get '/users/:id/create_deal/' => 'deals#new', as: 'new_deal'

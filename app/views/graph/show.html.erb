@@ -43,23 +43,6 @@
             <li class="side_bar_dropdown" onclick="setDropDownName( 'Italian', 'food_type' )">Italian</li>
             <li class="side_bar_dropdown" onclick="setDropDownName( 'Mexican', 'food_type' )">Mexican</li>
         </ul>
-    </div>    
-
-
-<!-- Day Of Week -->
-    <div class="dropdown">
-        <button id="day_of_week" class="side_bar_button" type="button" data-toggle="dropdown">Day Of Week
-        <span class="caret"></span></button>
-        <ul class="dropdown-menu" border="none">
-            <li class="side_bar_dropdown" onclick="setDropDownName( 'Everyday', 'day_of_week' )">-</li>
-            <li class="side_bar_dropdown" onclick="setDropDownName( 'Sunday', 'day_of_week' )">Sunday</li>
-            <li class="side_bar_dropdown" onclick="setDropDownName( 'Monday', 'day_of_week' )">Monday</li>
-            <li class="side_bar_dropdown" onclick="setDropDownName( 'Tuesday', 'day_of_week' )">Tuesday</li>
-            <li class="side_bar_dropdown" onclick="setDropDownName( 'Wednesday', 'day_of_week' )">Wednesday</li>
-            <li class="side_bar_dropdown" onclick="setDropDownName( 'Thursday', 'day_of_week' )">Thursday</li>
-            <li class="side_bar_dropdown" onclick="setDropDownName( 'Friday', 'day_of_week' )">Friday</li>
-            <li class="side_bar_dropdown" onclick="setDropDownName( 'Saturday', 'day_of_week' )">Saturday</li>
-        </ul>
     </div>
     
     
@@ -76,7 +59,7 @@
         </ul>
     </div>    
     
-<!-- Radius -->
+<!-- Distance -->
     <div class="dropdown">
         <button id="distance" class="side_bar_button" type="button" data-toggle="dropdown">Distance(Miles)
         <span class="caret"></span></button>
@@ -94,13 +77,21 @@
         </ul>
     </div>
 
+  <!-- Address -->
+    <form id="address" class="side_bar_item">Address:
+      <input type="text" id="street_address"
+             placeholder="910 Embarcadero del Norte, Isla Vista, CA 93117"
+             style="color: black; width: 175px">
+      </input>
+    </form>
+
     
 <!-- Empty Side Bar Item -->    
     <li class="side_bar_item"></li>
     
 <!-- Update Map -->
   <!--<div class="side_bar_button"><%=link_to "Search", load_deals_path %> </div>-->
-  <button id="update_map" class="side_bar_button" onClick="load_deals">Search</button>
+  <button id="update_map" class="side_bar_button" onClick="getFilters()">Search</button>
 
 </div>
 
@@ -114,10 +105,16 @@
 
 <script type="text/javascript">
     function getFilters() {
-        load_deals_path(document.getElementById( food_type ).textContent,
-                        document.getElementById( day_of_the_week ).textContent,
-                        document.getElementById( deal_type ).textContent,
-                        document.getElementById( distance ).textContent );
+        $.ajax({
+            url: "graph/load_filter_deals",
+            type: "GET",
+//            data: {food_type: document.getElementById( 'food_type' ).textContent,
+//                    deal_type: document.getElementById( 'deal_type' ).textContent,
+//                    distance: document.getElementById( 'distance' ).textContent,
+//                    street_address: document.getElementById( 'street_address' )},
+            data: { lat: 0 },
+            dataType: 'json'
+        });
     }
 </script>
 
