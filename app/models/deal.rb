@@ -10,10 +10,18 @@ class Deal < ActiveRecord::Base
   geocoded_by      :address
   after_validation :geocode
 
+<<<<<<< HEAD
   # def validate_address
   #   if StreetAddress::US.parse(address).nil?
   #     errors.add(address, "Need a valid address")
   #   end
   # end
+=======
+  def validate_address
+    if StreetAddress::US.parse(address).nil?
+      errors.add(address, "Need a valid address")
+    end
+  end
+>>>>>>> 95dbed5798bc54af5e000c2c92aa113a27a79b99
 
 end

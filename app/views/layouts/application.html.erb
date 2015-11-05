@@ -8,7 +8,8 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+
+<body class="bg_color">
 
   <div id="container">
     <div id="header">
@@ -22,6 +23,18 @@
       <%= render "layouts/footer" %>
     </div>
   </div>
+<<<<<<< HEAD
+=======
+</nav>
+
+<body>
+  <div class="container" background=grey>  
+    <%= flash_messages %>
+  </div>
+</body>
+
+<%= yield %>
+>>>>>>> 95dbed5798bc54af5e000c2c92aa113a27a79b99
 
 </body>
 </html>

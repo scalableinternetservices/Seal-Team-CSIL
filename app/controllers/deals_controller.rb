@@ -38,17 +38,17 @@ class DealsController < ApplicationController
     redirect_to "/users/#{current_user.id}/deals"
   rescue
     flash[:error] = "Something went wrong in editing the deal!"
-    redirect_to "/users/#{current_user.id}/deals"
+    redirect_to "/users/#{params[:user_id]}/deals"
   end
 
   def destroy
     deal = Deal.find_by(:id => params[:deal_id])
     deal.destroy!
     flash[:success] = "Your deal has been deleted."
-    redirect_to "/users/#{params[:user_id]}/deals"
+    redirect_to "/users/#{current_user.id}/deals#show"
     rescue
-      flash[:error] = "Something went wrong. Change this when specific validations are created."
-      redirect_to "/users/#{params[:user_id]}/deals"
+      flash[:error] = "Something went wrong when deleting the deal."
+      redirect_to "/users/#{current_user.id}/deals#show"
   end
 
   def update_view_count
