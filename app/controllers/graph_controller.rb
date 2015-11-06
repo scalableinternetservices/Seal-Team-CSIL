@@ -34,32 +34,34 @@ class GraphController < ApplicationController
   end
 
   def load_filter_deals
-    console.log( 'fail' )
-    # @distance_miles = distance.to_f()
-    # distance_meters = @distance_miles  * 1609.34
-    # location = Geocoder.search(street_address)
-    # @deals_within_proximity = []
+    distance_miles = params[ :distance ].to_f
+    distance_meters = distance_miles  * 1609.34
+    # location = Geocoder.search(params[ :street_address ] )
     # @lat = location[0].latitude
     # @lng = location[0].longitude
-    #
-    # deals = Deal.all
-    # hash = Gmaps4rails.build_markers(deals) do |deal, marker|
-    #   if deal.latitude.present?
-    #     if coordinate_distance([lat,lng],[deal.latitude, deal.longitude]) < distance_meters
-    #       if deal.deal_type == deal_type
-    #         if deal.food_type == food_type
-    #           marker.lat deal.latitude
-    #           marker.lng deal.longitude
-    #           marker.infowindow createInfoWindow(deal)
-    #         end
-    #       end
-    #     end
-    #   end
-    # end
-    # puts hash.to_json
-    # respond_to do |format|
-    #   format.json { render :json => hash, :layout => false}
-    # end
+    lat = Rails.cache.fetch('lat').to_f
+    lng = Rails.cache.fetch('lng').to_f
+
+    deals = Deal.all
+    hash = Gmaps4rails.build_markers(deals) do |deal, marker|
+      if deal.latitude.present?
+        if coordinate_distance( [lat, lng], [deal.latitude, deal.longitude] ) <= distance_meters
+          if deal.deal_type == params[ :deal_type ].chop
+            puts 'in deal_type'
+            if deal.food_type == params[ :food_type ].chop
+              puts 'in food_type'
+              marker.lat deal.latitude
+              marker.lng deal.longitude
+              marker.infowindow createInfoWindow(deal)
+            end
+          end
+        end
+      end
+    end
+    puts hash.to_json
+    respond_to do |format|
+      format.json { render :json => hash, :layout => false}
+    end
   end
 
 

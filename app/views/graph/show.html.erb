@@ -108,11 +108,10 @@
         $.ajax({
             url: "graph/load_filter_deals",
             type: "GET",
-//            data: {food_type: document.getElementById( 'food_type' ).textContent,
-//                    deal_type: document.getElementById( 'deal_type' ).textContent,
-//                    distance: document.getElementById( 'distance' ).textContent,
+            data: {food_type : document.getElementById( 'food_type' ).textContent,
+                    deal_type: document.getElementById( 'deal_type' ).textContent,
+                    distance : document.getElementById( 'distance'  ).textContent },
 //                    street_address: document.getElementById( 'street_address' )},
-            data: { lat: 0 },
             dataType: 'json'
         });
     }
