@@ -9,7 +9,10 @@
 <!-- <link href="assets/css/bootstrap-responsive.css" rel="stylesheet"> -->
 <!-- <%= stylesheet_link_tag    'bootstrap-responsive', media: 'all', 'data-turbolinks-track' => true %> -->
 <h1 class='center_graph'> Check out Local Deals! </h1>
-
+<div class = 'center_graph'>
+<%= link_to "Delete All Deals", delete_all_user_deals_path, method: "delete" %><br>
+<%= link_to "Delete All Users", delete_all_users_path, method: "delete" %> 
+</div>
 <!-- <div style='width: 1000px;'>
     <div id="map" style='width: 1000px; height: 400px; background-position: center;'></div>
 </div> -->

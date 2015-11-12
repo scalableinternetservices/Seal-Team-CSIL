@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
   root "graph#show"
 
+  delete '/destroy_users' => "users#destroy_all_users", as: 'delete_all_users'
+  delete '/destroy_deals' => 'deals#destroy_all_deals', as: 'delete_all_user_deals'
+  
+
   get  "/graph/load_local_deals"
   post "/graph/save_user_location"
   get  "/graph/load_filter_deals" => 'graph#load_filter_deals'
