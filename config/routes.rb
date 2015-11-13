@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
   root "graph#show"
 
+  delete '/destroy_users' => "users#destroy_all_users", as: 'delete_all_users'
+  delete '/destroy_deals' => 'deals#destroy_all_deals', as: 'delete_all_user_deals'
+  
+
   get  "/graph/load_local_deals"
   post "/graph/save_user_location"
   get  "/graph/load_filter_deals" => 'graph#load_filter_deals'
@@ -13,6 +17,7 @@ Rails.application.routes.draw do
   get '/users/:user_id/deals/:deal_id' => 'deals#edit', as: 'edit_deal'
   patch '/users/:user_id/deals/:deal_id' => 'deals#update', as: 'update_deal'
   delete '/users/:user_id/deals/:deal_id' => 'deals#destroy', as: 'delete_deal'
+  delete '/users/:user_id/deals' => 'deals#destroy_all', as: 'delete_all_deals'
 
   patch '/deals/update_view_count' => 'deals#update_view_count'
 

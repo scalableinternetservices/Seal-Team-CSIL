@@ -10,11 +10,6 @@
       <%= f.label :email, "Email:" %>
       <%= @user.email %>
     </div>
-    
-    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
-      <%= f.label :food_type, "Style of Food:" %>
-      <%= @user.food_type %>
-    </div>
 
     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
       <%= f.label :address, "Address:" %>
@@ -29,11 +24,6 @@
     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
       <%= f.label :website, "Website:" %>
       <%= @user.website %>
-    </div>
-    
-    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
-      <%= f.label :avatar, "Picture:" %>
-      <%= image_tag @user.avatar.url, size: "240x150" %>
     </div>
   
   <% end %>

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
-  before_filter :authorize, :only => [:show, :edit, :update]
+  # before_filter :authorize, :only => [:show, :edit, :update]
+  skip_before_filter :verify_authenticity_token
 
   def new
     # Render the login view
@@ -29,6 +30,14 @@ class UsersController < ApplicationController
       flash[:error] = "Something went wrong. Change this when specific validations are created."
       redirect_to "/users/#{:id}"
     end
+  end
+  
+  def destroy_all_users
+    users = User.all
+    users.each do |user|
+      user.destroy!
+    end
+    redirect_to "/"
   end
 
   def create
