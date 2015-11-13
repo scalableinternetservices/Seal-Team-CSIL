@@ -9,10 +9,7 @@
 <!-- <link href="assets/css/bootstrap-responsive.css" rel="stylesheet"> -->
 <!-- <%= stylesheet_link_tag    'bootstrap-responsive', media: 'all', 'data-turbolinks-track' => true %> -->
 <h1 class='center_graph'> Check out Local Deals! </h1>
-<div class = 'center_graph'>
-<%= link_to "Delete All Deals", delete_all_user_deals_path, method: "delete" %><br>
-<%= link_to "Delete All Users", delete_all_users_path, method: "delete" %> 
-</div>
+
 <!-- <div style='width: 1000px;'>
     <div id="map" style='width: 1000px; height: 400px; background-position: center;'></div>
 </div> -->
@@ -21,7 +18,10 @@
     <div id="map_canvas" class="map_canvas"></div>
 </div>
 
-
+<div class = 'center_graph'>
+  <%= link_to "Delete All Deals", delete_all_user_deals_path, method: "delete" %><br>
+  <%= link_to "Delete All Users", delete_all_users_path, method: "delete" %>
+</div>
 
 <!-- Side Bar -->
 <div class="side_bar" style="color: #333333">
@@ -88,6 +88,14 @@
       </input>
     </form>
 
+  <!-- LatLong -->
+  <form id="lat_lng" class="side_bar_item">Lat, Long:
+    <input type="text" id="lat_lng"
+           placeholder="34.412895, -119.857303"
+           style="color: black; width: 175px">
+    </input>
+  </form>
+
     
 <!-- Empty Side Bar Item -->    
     <li class="side_bar_item"></li>
@@ -114,7 +122,8 @@
 //            data: {food_type: document.getElementById( 'food_type' ).textContent,
 //                    deal_type: document.getElementById( 'deal_type' ).textContent,
 //                    distance: document.getElementById( 'distance' ).textContent,
-//                    street_address: document.getElementById( 'street_address' )},
+//                    street_address: document.getElementById( 'street_address' ),
+//                    lat_lng: document.getElementById( 'lat_lng' )},
             data: { lat: 0 },
             dataType: 'json'
         });
