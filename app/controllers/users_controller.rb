@@ -31,6 +31,14 @@ class UsersController < ApplicationController
       redirect_to "/users/#{:id}"
     end
   end
+  
+  def destroy_all_users
+    users = User.all
+    users.each do |user|
+      user.destroy!
+    end
+    redirect_to "/"
+  end
 
   def create
     user = User.new(formatted_user_params)

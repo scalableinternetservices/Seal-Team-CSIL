@@ -42,6 +42,14 @@ class DealsController < ApplicationController
     redirect_to "/users/#{current_user.id}/deals"
   end
 
+  def destroy_all_deals
+    deals = Deal.all
+    deals.each do |deal|
+      deal.destroy!
+    end
+    redirect_to '/'
+  end
+
   def destroy_all
     user = User.find_by(id: params[:user_id])
     deals = user.deals
