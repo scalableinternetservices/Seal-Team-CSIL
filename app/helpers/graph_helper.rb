@@ -1,12 +1,12 @@
 module GraphHelper
 
   def createInfoWindow(deal)
-    "<img src='#{deal.user.avatar.url}' alt = '' width='130' height='90'>
-    <div><b>#{deal.user.name}</b> (#{deal.user.food_type})</div>
-    <div> #{deal.user.phone_number} </div>
+    "<div><b>#{deal.user.name}</div>
     </br>
 
-    <div> <i> #{deal.description} </i> </div>
+    <div> <i> #{deal.name} </i> </div>
+    <div> #{deal.food_type} </div>
+    <div> #{deal.deal_type} </div>
     <div>Start Time: #{deal.start_time} </div>
     <div>End Time: #{deal.end_time}</div>
     <div> <a href=#{deal.user.website}> Website: </div>

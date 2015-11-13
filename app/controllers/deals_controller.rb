@@ -82,18 +82,19 @@ class DealsController < ApplicationController
 
         if form_params[ :latitude ].present? and form_params[ :longitude ].present?
           lat_lng = form_params[ :latitude ] + ',' + form_params[ :longitude ]
-          form_params.except!('latitude', 'longitude', 'street_address', 'city', 'zip_code', 'state')
           form_params[ :address ] = Geocoder.search( lat_lng )[0].data["formatted_address"]
         else
           full_address = form_params[:street_address] + ' ' + form_params[:city] + ' ' + form_params[:zip_code] + ' ' + form_params[:state]
-          form_params.except!('latitude', 'longitude', 'street_address', 'city', 'zip_code', 'state')
           form_params[:address] = full_address
-      end
-      form_params
+          form_params[:latitude] = Geocoder.search( form_params[ :street_address ] )[0].data["latitude"]
+          form_params[:longitude] = Geocoder.search( form_params[ :street_address ] )[0].data["longitude"]
+        end
+        form_params.except!('street_address', 'city', 'zip_code', 'state')
+        form_params
     end
 
     def deals_params
-      params.require(:deal).permit(:food_name, :description, :address, :deal_type, :start_time, :end_time, :food_type, :avatar)
+      params.require(:deal).permit(:food_name, :description, :address, :latitude, :longitude, :deal_type, :start_time, :end_time, :food_type, :avatar)
     end
 
 end

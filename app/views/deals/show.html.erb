@@ -1,9 +1,8 @@
-<h1> Current Deals </h1>
-<div>
-  Total Deals: <%=@deals.count%><br>
-  <%= link_to "Delete All", delete_all_deals_path(user_id: current_user.id), method: "delete" %> 
+<h1 class='center'> Current Deals </h1>
+<div class='center'>
+  <b>Total Deals: <%=@deals.count%></b><br><br>
 </div>
-<div class="table-responsive">
+<div class="table-responsive" style="width:90%;margin-left: auto;margin-right: auto;">
   <table class="table">
     <tr> 
       <th> Food Name </th> 
@@ -27,11 +26,14 @@
         <td> <%= deal.end_time.strftime("%B %d, %Y at %I:%M%p %Z") %> </td>
         <td> <%= deal.food_type %></td>
         <td> <%= deal.views %></td>
-        <td> <%= link_to "Edit This Deal", edit_deal_path(user_id: current_user.id, deal_id: deal.id) %> </td>
-        <td> <%= link_to "Delete This Deal", delete_deal_path(user_id: current_user.id, deal_id: deal.id), method: "delete" %> </td>
+        <td> <%= link_to "Edit Deal", edit_deal_path(user_id: current_user.id, deal_id: deal.id) %> </td>
+        <td> <%= link_to "Delete Deal", delete_deal_path(user_id: current_user.id, deal_id: deal.id), method: "delete" %> </td>
       </tr>
     <% end %>
   </table>
 </div>
 
-<p class = 'center'> <%= link_to "Home", root_path %> | <%= link_to "Add Food Deal", new_deal_path(@user) %> | <%= link_to "Edit Profile", edit_user_path(@user) %> </p>
+<p class = 'center'> <%= link_to "Home", root_path %>
+  | <%= link_to "Add Food Deal", new_deal_path(@user) %>
+  | <%= link_to "Delete All Deals", delete_all_deals_path(user_id: current_user.id), method: "delete" %>
+  | <%= link_to "Edit Profile", edit_user_path(@user) %> </p>
