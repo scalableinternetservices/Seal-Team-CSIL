@@ -40,7 +40,7 @@
         <button id="food_type" class="side_bar_button" type="button" data-toggle="dropdown">Food Type
         <span class="caret"></span></button>
         <ul class="dropdown-menu" border="none">
-            <li class="side_bar_dropdown" onclick="setDropDownName( 'Any Type', 'food_type' )">-</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Any Type', 'food_type' )">Any Type</li>
             <li class="side_bar_dropdown" onclick="setDropDownName( 'Asian', 'food_type' )">Asian</li>
             <li class="side_bar_dropdown" onclick="setDropDownName( 'American', 'food_type' )">American</li>
             <li class="side_bar_dropdown" onclick="setDropDownName( 'French', 'food_type' )">French</li>
@@ -55,7 +55,7 @@
         <button id="deal_type" class="side_bar_button" type="button" data-toggle="dropdown">Deal Type
         <span class="caret"></span></button>
         <ul class="dropdown-menu" border="none">
-            <li class="side_bar_dropdown" onclick="setDropDownName( 'All Deals', 'deal_type' )">-</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'All Deals', 'deal_type' )">All Deals</li>
             <li class="side_bar_dropdown" onclick="setDropDownName( 'Free', 'deal_type' )">Free</li>
             <li class="side_bar_dropdown" onclick="setDropDownName( 'Buy One Get One Free', 'deal_type' )">Buy One Get One Free</li>
             <li class="side_bar_dropdown" onclick="setDropDownName( 'Buy One Get One Half Off', 'deal_type' )">Buy One Get One Half Off</li>
@@ -68,7 +68,7 @@
         <button id="distance" class="side_bar_button" type="button" data-toggle="dropdown">Distance(Miles)
         <span class="caret"></span></button>
         <ul class="dropdown-menu" border="none">
-            <li class="side_bar_dropdown" onclick="setDropDownName( 'Everywhere', 'distance' )">-</li>
+            <li class="side_bar_dropdown" onclick="setDropDownName( 'Everywhere', 'distance' )">Everywhere</li>
             <li class="side_bar_dropdown" onclick="setDropDownName( '1', 'distance' )">1</li>
             <li class="side_bar_dropdown" onclick="setDropDownName( '5', 'distance' )">5</li>
             <li class="side_bar_dropdown" onclick="setDropDownName( '10', 'distance' )">10</li>
@@ -84,16 +84,16 @@
   <!-- Address -->
     <form id="address" class="side_bar_item">Address:
       <input type="text" id="street_address"
-             placeholder="910 Embarcadero del Norte, Isla Vista, CA 93117"
-             style="color: black; width: 175px">
+             value="Lagoon Rd, Isla Vista, CA 93117, USA"
+             style="color: black; width: 180px">
       </input>
     </form>
 
   <!-- LatLong -->
   <form id="lat_lng" class="side_bar_item">Lat, Long:
     <input type="text" id="lat_lng"
-           placeholder="34.412895, -119.857303"
-           style="color: black; width: 175px">
+           value="34.4137495,-119.84165970000001"
+           style="color: black; width: 180px">
     </input>
   </form>
 
@@ -138,3 +138,4 @@
         findUser();
     <% end %>
 </script>
+

@@ -59,15 +59,14 @@ class UsersController < ApplicationController
     end
 
     def formatted_user_params
-      form_params = params.require(:user).permit(:name, :email, :password, :password_confirmation, :latitude, :longitude, :street_address, :city, :zip_code, :state, :phone_number, :website, :avatar)
+      form_params = params.require(:user).permit(:name, :email, :password, :password_confirmation, :lat_lng, :street_address, :city, :zip_code, :state, :phone_number, :website, :avatar)
 
-      if form_params[ :latitude ].present? and form_params[ :longitude ].present?
-        lat_lng = form_params[ :latitude ] + ',' + form_params[ :longitude ]
-        form_params.except!('latitude', 'longitude', 'street_address', 'city', 'zip_code', 'state')
-        form_params[ :address ] = Geocoder.search( lat_lng )[0].data["formatted_address"]
+      if form_params[ :lat_lng ].present?
+        form_params.except!( 'street_address', 'city', 'zip_code', 'state')
+        form_params[ :address ] = Geocoder.search( form_params[ :lat_lng ] )[0].data["formatted_address"]
       else
         full_address = form_params[:street_address] + ' ' + form_params[:city] + ' ' + form_params[:zip_code] + ' ' + form_params[:state]
-        form_params.except!('latitude', 'longitude', 'street_address', 'city', 'zip_code', 'state')
+        form_params.except!( 'street_address', 'city', 'zip_code', 'state')
         form_params[:address] = full_address
       end
       form_params[:phone_number] = format_phone_number(form_params[:phone_number])

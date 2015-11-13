@@ -31,6 +31,19 @@
     text-align: center;
 }
 
+.column{
+  display: block;
+  float: left;
+  width: 35%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.center_row {
+  display:block;
+  margin: 0 auto;
+}
+
 // Only change these colors to modify the color scheme
 .side_bar_color_scheme {
     background-color: #444444; // green

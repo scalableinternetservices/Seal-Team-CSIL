@@ -1,7 +1,7 @@
 module GraphHelper
 
   def createInfoWindow(deal)
-    "<div><b>#{deal.user.name}</div>
+    "<div><b>#{deal.user.name} #{deal.user.food_type}</div>
     </br>
 
     <div> <i> #{deal.name} </i> </div>

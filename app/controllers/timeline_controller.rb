@@ -16,12 +16,20 @@ class TimelineController < ApplicationController
   end
 
   def load_deals
-  	@distance_miles = params[:distance_from_address].to_f()
+  	@distance_miles = params[ :distance_from_address ].to_f()
   	distance_meters = @distance_miles  * 1609.34
-  	location = Geocoder.search(params[:street_address])
+
+    if params[ :street_address ].present?
+    	location = Geocoder.search( params[ :street_address ] )
+    elsif params[ :lat_lng ].present?
+      location = Geocoder.search( params[ :lat_lng ] )
+    else
+      location = Geocoder.search( Rails.cache.fetch('lat') + ',' + Rails.cache.fetch('lng') )
+    end
+
     @deals_within_proximity = []
-  	@lat = location[0].latitude
-  	@lng = location[0].longitude
+    @lat = location[0].latitude
+    @lng = location[0].longitude
 
   	Deal.all.each do |deal|
   		if coordinate_distance([deal.latitude, deal.longitude],[@lat,@lng]) <= distance_meters

@@ -47,9 +47,7 @@ class GraphController < ApplicationController
       if deal.latitude.present?
         if coordinate_distance( [lat, lng], [deal.latitude, deal.longitude] ) <= distance_meters
           if deal.deal_type == params[ :deal_type ].chop
-            puts 'in deal_type'
             if deal.food_type == params[ :food_type ].chop
-              puts 'in food_type'
               marker.lat deal.latitude
               marker.lng deal.longitude
               marker.infowindow createInfoWindow(deal)

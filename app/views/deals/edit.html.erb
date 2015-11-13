@@ -1,19 +1,14 @@
  <h1 class='center'> Edit Deal </h1>
   <%= form_for :deal, :html => {:class => "form-horizontal"},
                url: update_deal_path(user_id: current_user.id, deal_id: @deal.id), method: :patch do |f| %>
-    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;padding-bottom:40px;">
       <%= f.label :food_name, "Food Name:" %>
       <%= f.text_field :food_name, :placeholder => @deal.food_name, class: "form-control" %>
     </div>
 
-    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
-      <%= f.label :description, "Description:" %>
-      <%= f.text_area :description, size: "25x3", :placeholder => @deal.description, class: "form-control" %>
-    </div>
-
-    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
-      <%= f.label :address, "Address:" %>
-      <%= f.text_area :address, size: "25x4", :placeholder => @deal.address, class: "form-control" %>
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;padding-bottom:40px;">
+      <%= f.label :address, "Street Address:" %>
+      <%= f.text_field :address, :placeholder => @deal.address, class: "form-control" %>
     </div>
 
     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
@@ -22,21 +17,27 @@
                                :placeholder => @deal.deal_type, class: "form-control" %>
     </div>
 
+     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+       <%= f.label :food_type, "Food Type:" %>
+       <%= f.collection_select :food_type, Deal::FOOD_TYPES, :to_s, :to_s,
+                               :placeholder => @deal.food_type, class: "form-control" %>
+     </div>
+
     <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
       <%= f.label :start_time, "Start Time:" %>
       <%= f.text_field :start_time, :placeholder => @deal.start_time, class: "form-control" %>
     </div>
 
-    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;padding-bottom:30px;">
       <%= f.label :end_time, "End Time:" %>
       <%= f.text_field :end_time, :placeholder => @deal.end_time, class: "form-control" %>
     </div>
 
-    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
-      <%= f.label :food_type, "Food Type:" %>
-      <%= f.collection_select :food_type, Deal::FOOD_TYPES, :to_s, :to_s,
-                              :placeholder => @deal.food_type, class: "form-control" %>
-    </div>
     <%= f.submit "Submit", class: "btn btn-info btn-circle btn-xl", style:"width:30%;display:table;
    margin:0 auto" %>
   <% end %>
+
+ <br><br>
+ <p class = 'center'> <%= link_to "Add Food Deal", new_deal_path(@user) %>
+                        | <%= link_to "Show Food Deals", show_deals_path(@user) %>
+                        | <%= link_to "Edit Profile", edit_user_path(@user) %> </p>
