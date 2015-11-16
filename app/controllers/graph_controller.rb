@@ -20,7 +20,7 @@ class GraphController < ApplicationController
         end
       end
     end
-    puts hash.to_json
+    #puts hash.to_json
     respond_to do |format|
       format.json { render :json => hash, :layout => false}
     end
@@ -66,8 +66,8 @@ class GraphController < ApplicationController
   private
 
   def coordinate_distance(loc1, loc2)
-    puts loc1
-    puts loc2
+    #puts loc1
+    #puts loc2
     rad_per_deg = Math::PI/180  # PI / 180
     rkm = 6371                  # Earth radius in kilometers
     rm = rkm * 1000             # Radius in meters

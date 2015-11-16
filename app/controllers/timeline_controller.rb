@@ -10,7 +10,7 @@ class TimelineController < ApplicationController
     Deal.all.each do |deal|
     	if coordinate_distance([deal.latitude, deal.longitude],[@lat,@lng]) <= distance_meters
   			@deals_within_proximity.append(deal)
-  		end
+  	  end
     end
     render 'show'
   end
@@ -43,8 +43,8 @@ class TimelineController < ApplicationController
   private
 
   def coordinate_distance(loc1, loc2)
-    puts loc1
-    puts loc2
+    #puts loc1
+    #puts loc2
     rad_per_deg = Math::PI/180  # PI / 180
     rkm = 6371                  # Earth radius in kilometers
     rm = rkm * 1000             # Radius in meters
