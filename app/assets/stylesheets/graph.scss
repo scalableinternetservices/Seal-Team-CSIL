@@ -33,13 +33,13 @@
 
 // Only change these colors to modify the color scheme
 .side_bar_color_scheme {
-    background-color: #444444; // green
-    border-color: #135C4E;     // darker green
-    color: #FFFFFF;            // white - color of text on buttons
+    background-color: #23233E; // Blue
+    border-color: #111;        // Black
+    color: #FFFFFF;            // White - color of text on buttons
 }
 
 .side_bar_color_scheme_hover {
-    background-color: #357E70; // lighter green
+    background-color: #45456F; // lighter green
 }
 
 .bg_color {
@@ -50,6 +50,10 @@
     @extend .side_bar_color_scheme;
     position: absolute;
     left: 0;
+    border-top: solid;
+    border-right: solid;
+    border-left: solid;
+    border-color: #111;
     top: 52px;
     bottom: -25%; // so scrolling will not see bottom
     width: 200px;
