@@ -43,7 +43,7 @@ function initMap(mapOptions) {
     console.log("building map");
     handler = Gmaps.build('Google');
     handler.buildMap({ provider: mapOptions, internal: {id: 'map_canvas'}}, function(){
-        getMarkers(handler.getMap().getCenter().G, handler.getMap().getCenter().K).done(function(result) {
+        getMarkers(handler.getMap().getCenter().lat(), handler.getMap().getCenter().lng()).done(function(result) {
             result.map(function(m){
                 marker = handler.addMarker(m);
                 google.maps.event.addListener(marker.getServiceObject(), 'click', function(){
@@ -54,7 +54,7 @@ function initMap(mapOptions) {
             });
         });
         google.maps.event.addListener(handler.getMap(), 'idle', function() {
-            getMarkers(handler.getMap().getCenter().G, handler.getMap().getCenter().K).done(function (result) {
+            getMarkers(handler.getMap().getCenter().lat(), handler.getMap().getCenter().lng()).done(function (result) {
                 result.map(function(m){
                     marker = handler.addMarker(m);
                     google.maps.event.addListener(marker.getServiceObject(), 'click', function(){
