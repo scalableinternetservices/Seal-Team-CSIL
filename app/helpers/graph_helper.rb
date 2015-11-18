@@ -4,7 +4,7 @@ module GraphHelper
     "<div><b>#{deal.user.name} #{deal.user.food_type}</div>
     </br>
 
-    <div> <i> #{deal.name} </i> </div>
+    <div> <i> #{deal.food_name} </i> </div>
     <div> #{deal.food_type} </div>
     <div> #{deal.deal_type} </div>
     <div>Start Time: #{deal.start_time} </div>
