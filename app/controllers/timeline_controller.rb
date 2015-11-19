@@ -8,9 +8,11 @@ class TimelineController < ApplicationController
     @distance_miles = 5.0
     distance_meters = @distance_miles * 1609.34
     Deal.all.each do |deal|
-    	if coordinate_distance([deal.latitude, deal.longitude],[@lat,@lng]) <= distance_meters
-  			@deals_within_proximity.append(deal)
-  		end
+      if deal.latitude.present? and deal.longitude.present?
+        if coordinate_distance([deal.latitude, deal.longitude],[@lat,@lng]) <= distance_meters
+          @deals_within_proximity.append(deal)
+        end
+      end
     end
     render 'show'
   end
