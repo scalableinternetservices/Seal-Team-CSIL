@@ -1,10 +1,10 @@
-<h1 class='center'> Current Deals </h1>
-<div class='center'>
+<%= image_tag "IslaVistaFoodFinderCurrentDeals.png", class: "style_logo" %>
+<div class='center' style="padding-top: 60px;">
   <b>Total Deals: <%=@deals.count%></b><br><br>
 </div>
 <div class="table-responsive" style="width:90%;margin-left: auto;margin-right: auto;">
   <table class="table">
-    <tr> 
+    <tr style="background-color: #F2D34D">
       <th> Food Name </th> 
       <th> Location </th>
       <th> Deal Type </th>
@@ -16,12 +16,12 @@
       <th> Delete </th>
     </tr>
     <% @deals.each do |deal| %>
-      <tr>
+      <tr style="background-color: #FFFFFF">
         <td> <%= deal.food_name %> </td>
         <td> <%= deal.address %></td>
         <td> <%= deal.deal_type %></td>
-        <td> <%= deal.start_time.strftime("%B %d, %Y at %I:%M%p %Z") %> </td>
-        <td> <%= deal.end_time.strftime("%B %d, %Y at %I:%M%p %Z") %> </td>
+        <td> <%= deal.start_time.strftime("%m-%d-%Y at %I:%M%p") %> </td>
+        <td> <%= deal.end_time.strftime("%m-%d-%Y at %I:%M%p") %> </td>
         <td> <%= deal.food_type %></td>
         <td> <%= deal.views %></td>
         <td> <%= link_to "Edit Deal", edit_deal_path(user_id: current_user.id, deal_id: deal.id) %> </td>

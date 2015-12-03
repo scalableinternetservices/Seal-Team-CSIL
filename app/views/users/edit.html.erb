@@ -34,6 +34,11 @@
       <%= f.label :website, "Website:" %>
       <%= f.text_field :website, class: "form-control" %>
     </div>
+
+    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;padding-bottom:30px;">
+      <%= f.label :avatar, "Picture:" %>
+      <%= f.file_field :avatar, class: "form-control" %>
+    </div>
     
     <%= f.submit "Submit", class: "btn btn-info btn-circle btn-xl", style:"width:30%;display:table;
    margin:0 auto" %>

@@ -9,7 +9,7 @@ class DealsController < ApplicationController
     flash[:success] = "Deal has been created!"
     redirect_to "/users/#{current_user.id}/deals"
     else
-      flash[:error] = "Something went wrong in creating the deal!"
+      flash[:error] = deal.errors.full_messages.to_sentence
       redirect_to "/users/#{current_user.id}/deals"
     end
   end 
@@ -38,8 +38,8 @@ class DealsController < ApplicationController
     flash[:success] = "Deal has been updated!"
     redirect_to "/users/#{current_user.id}/deals"
   rescue
-    flash[:error] = "Something went wrong in editing the deal!"
-    redirect_to "/users/#{current_user.id}/deals"
+    flash[:error] = deal.errors.full_messages.to_sentence
+    redirect_to "/users/#{current_user.id}/deals/#{deal.id}"
   end
 
   def destroy_all_deals

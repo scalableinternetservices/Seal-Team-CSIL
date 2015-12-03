@@ -1,35 +1,36 @@
-  <h1 class='center'> User Profile </h1>
-   <%= form_for :user, :html => {:class => "form-horizontal"}, url: '/users/:id/users#show' do |f| %>
+<%= image_tag "IslaVistaFoodFinderUserProfile.png", class: "style_logo" %>
+  <div style="background-color: rgba(160,142,125,0.3);width:35%;margin-left: auto;margin-right: auto;margin-top:50px;">  
+    <%= form_for :user, :html => {:class => "form-horizontal"}, url: '/users/:id/users#show' do |f| %>
 
-    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
-      <%= f.label :name, "Name:" %>
-      <%= @user.name %>
-    </div>
+      <div class="form-group", style="margin-left: auto;margin-right: auto;">
+        <%= f.label :name, "Name:" %>
+        <%= @user.name %>
+      </div>
 
-    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
-      <%= f.label :email, "Email:" %>
-      <%= @user.email %>
-    </div>
+      <div class="form-group", style="margin-left: auto;margin-right: auto;">
+        <%= f.label :email, "Email:" %>
+        <%= @user.email %>
+      </div>
 
-    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
-      <%= f.label :address, "Address:" %>
-      <%= @user.address %>
-    </div>
+      <div class="form-group", style="margin-left: auto;margin-right: auto;">
+        <%= f.label :address, "Address:" %>
+        <%= @user.address %>
+      </div>
 
-    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
-      <%= f.label :phone_number, "Phone Number:" %>
-      <%= @user.phone_number %>
-    </div>
+      <div class="form-group", style="margin-left: auto;margin-right: auto;">
+        <%= f.label :phone_number, "Phone Number:" %>
+        <%= @user.phone_number %>
+      </div>
+      
+      <div class="form-group", style="margin-left: auto;margin-right: auto;">
+        <%= f.label :website, "Website:" %>
+        <%= @user.website %>
+      </div>
     
-    <div class="form-group", style="width:30%;margin-left: auto;margin-right: auto;">
-      <%= f.label :website, "Website:" %>
-      <%= @user.website %>
-    </div>
-  
-  <% end %>
+    <% end %>
+  </div>
 
-  <br><br><br>
-<p class = 'center'> <%= link_to "Add Food Deal", new_deal_path(@user) %>
+<p class='center' style='padding-top: 30px;'> <%= link_to "Add Food Deal", new_deal_path(@user) %>
                     | <%= link_to "Show Food Deals", show_deals_path(@user) %>
                     | <%= link_to "Edit Profile", edit_user_path(@user) %> </p>
 

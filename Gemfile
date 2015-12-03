@@ -3,8 +3,10 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
+# Use mysql for database
+gem 'mysql2', '~> 0.3.13', platforms: :ruby 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -50,6 +52,8 @@ gem 'StreetAddress', :require => "street_address"
 #Gem for phone number validation
 gem 'phony_rails'
 
+#Gem for making pages of the timeline view page.
+gem 'will_paginate'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

@@ -2,6 +2,7 @@ class TimelineController < ApplicationController
 
   def show
     # Render timeline and pass all necessary info to the view.
+
     @deals_within_proximity = []
     @lat = Rails.cache.fetch('lat').to_f
     @lng = Rails.cache.fetch('lng').to_f
@@ -12,6 +13,7 @@ class TimelineController < ApplicationController
   			@deals_within_proximity.append(deal)
   		end
     end
+    @deals_within_proximity = @deals_within_proximity.paginate(:page => params[:page], :per_page => 10)
     render 'show'
   end
 
@@ -33,18 +35,17 @@ class TimelineController < ApplicationController
 
   	Deal.all.each do |deal|
   		if coordinate_distance([deal.latitude, deal.longitude],[@lat,@lng]) <= distance_meters
-        if deal.deal_type == params[:deal_type]
-          if deal.food_type == params[:food_type]
-    			  @deals_within_proximity.append(deal)
-          end
+        if deal.food_type == params[:food_type]
+  			  @deals_within_proximity.append(deal)
         end
   		end
   	end
+    @deals_within_proximity = @deals_within_proximity.paginate(:page => params[:page], :per_page => 10)
   	render 'show'
   end
 
   def reset_deals
-    @deals_within_proximity = Deal.all
+    @deals_within_proximity = Deal.all.paginate(:page => params[:page], :per_page => 10)
     render 'show'
   end
 

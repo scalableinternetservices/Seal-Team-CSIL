@@ -7,24 +7,21 @@ class GraphController < ApplicationController
   end
 
   def load_local_deals
+    num = params[:num]
     lat = params[:lat].to_f
     lng = params[:lng].to_f
-    deals = Deal.all
+    deals = Deal.where("sqrt(power(#{lat}-latitude,2) + power(#{lng}-longitude,2)) < 0.0164").limit(num)
     hash = Gmaps4rails.build_markers(deals) do |deal, marker|
-      #TODO Add validation to deals so that they must have lat and lng, then get rid of this check
-      if deal.latitude.present?
-        if coordinate_distance([lat,lng],[deal.latitude, deal.longitude]) < 8000
-          marker.lat deal.latitude
-          marker.lng deal.longitude
-          marker.infowindow createInfoWindow(deal)
-        end
-      end
+
+      marker.lat deal.latitude
+      marker.lng deal.longitude
+      imageURL = deal.user.avatar.path ? deal.user.avatar : "/assets/NoImage.png"
+      marker.infowindow createInfoWindow(deal, imageURL)
+
     end
-    #puts hash.to_json
     respond_to do |format|
       format.json { render :json => hash, :layout => false}
     end
-    #render hash, :layout => false
   end
 
   def save_user_location
@@ -50,7 +47,8 @@ class GraphController < ApplicationController
             if deal.food_type == params[ :food_type ].chop
               marker.lat deal.latitude
               marker.lng deal.longitude
-              marker.infowindow createInfoWindow(deal)
+              imageURL = deal.user.avatar.path ? deal.user.avatar : "/assets/NoImage.png"
+              marker.infowindow createInfoWindow(deal, imageURL)
             end
           end
         end

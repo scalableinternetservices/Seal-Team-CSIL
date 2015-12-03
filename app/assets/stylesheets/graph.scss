@@ -9,8 +9,8 @@
 }
 .map_container .map_canvas{
     position: absolute;
-    top: 0;
-    right: 50px;
+    top: 50px;
+    right: 250px;
     left: 250px;
     bottom: 30%;
     min-width: 500px;
@@ -19,9 +19,14 @@
     padding: 0;
 }
 
+.style_logo {
+    display: block;
+    margin: 0 auto;
+    max-height: 220px;
+    max-width: 550px;
+}
+
 .center_graph {
-    margin-left: 350px;
-    margin-right: 150px;
     text-align: center;
 }
 

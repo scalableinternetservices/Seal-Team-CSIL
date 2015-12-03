@@ -25,10 +25,10 @@ class UsersController < ApplicationController
     if user.save
       session[:user_id] = user.id
       flash[:success] = "Your information has been updated."
-      redirect_to "/"
+      redirect_to "/users/#{user.id}"
     else
-      flash[:error] = "Something went wrong. Change this when specific validations are created."
-      redirect_to "/users/#{:id}"
+      flash[:error] = user.errors.full_messages.to_sentence
+      redirect_to "/users/#{user.id}/edit"
     end
   end
   
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
       flash[:success] = "Account has been created!"
       redirect_to "/"
     else
-      flash[:error] = "Something went wrong in creating the account!"
+      flash[:error] = user.errors.full_messages.to_sentence
       redirect_to '/signup'
     end
   end
@@ -59,7 +59,7 @@ class UsersController < ApplicationController
     end
 
     def formatted_user_params
-      form_params = params.require(:user).permit(:name, :email, :password, :password_confirmation, :lat_lng, :street_address, :city, :zip_code, :state, :phone_number, :website, :avatar)
+      form_params = params.require(:user).permit(:name, :email, :password, :password_confirmation, :street_address, :city, :zip_code, :state, :phone_number, :website, :avatar)
 
       if form_params[ :lat_lng ].present?
         form_params[ :address ] = Geocoder.search( form_params[ :lat_lng ] )[0].data["formatted_address"]
