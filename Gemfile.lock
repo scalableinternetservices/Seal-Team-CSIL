@@ -26,6 +26,10 @@ GEM
       rack-test (~> 0.6.2)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    actionpack-action_caching (1.1.1)
+      actionpack (>= 4.0.0, < 5.0)
+    actionpack-page_caching (1.0.2)
+      actionpack (>= 4.0.0, < 5)
     actionview (4.2.4)
       activesupport (= 4.2.4)
       builder (~> 3.1)
@@ -172,6 +176,8 @@ PLATFORMS
 
 DEPENDENCIES
   StreetAddress
+  actionpack-action_caching
+  actionpack-page_caching
   bcrypt (~> 3.1.7)
   bootstrap-sass (~> 3.2.0)
   byebug

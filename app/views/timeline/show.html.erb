@@ -1,4 +1,4 @@
-<%= image_tag "IslaVistaFoodFinderTimelineView.png", class: "style_logo" %>
+<%= image_tag "#{asset_path 'IslaVistaFoodFinderTimelineView.png'}", class: "style_logo" %>
 
 <%= form_tag('/timeline/load_deals', :method => :get) do %>
   <div class="form-group", style="width:35%;margin-left: auto;margin-right: auto;padding-top: 80px">
@@ -16,31 +16,35 @@
     <b>Food Type:</b>
     <%= select_tag :food_type, options_for_select( ['Any'] + Deal::FOOD_TYPES ) %>
   </div>
-  <p class="center" style="padding-bottom:30px;"><%= submit_tag "Search" %> | <%= link_to "Reset", reset_deals_path %></p>
+  <p class="center" style="padding-bottom:30px;"><%= submit_tag "Search" %> | <%= link_to "Reset", timeline_path %></p>
 <%end%>
 
 <br><br>
 <div class="table-responsive" style="width:90%;margin-left: auto;margin-right: auto;">
-<table class = "table">
-	<tr style="background-color: #F2D34D"> 
-    <th> Food Name </th> 
-    <th> Location </th>
-    <th> Deal Type </th>
-    <th> Start Time </th>
-    <th> End Time </th>
-    <th> Food Type </th>
-  </tr>
-	<% @deals_within_proximity.each do |deal| %>
-	  <tr style="background-color: #FFFFFF">
-      <td> <%= deal.food_name %> </td>
-      <td> <%= deal.address %></td>
-      <td> <%= deal.deal_type %></td>
-      <td> <%= deal.start_time.strftime("%B %d, %Y at %I:%M%p %Z") %> </td>
-      <td> <%= deal.end_time.strftime("%B %d, %Y at %I:%M%p %Z") %> </td>
-      <td> <%= deal.food_type %></td>
-	  </tr>
-	    <% end %>
-</table>	  
+ <% cache(cache_key_for_timeline_deal_table) do %>  
+  <table class = "table">
+  	<tr style="background-color: #F2D34D"> 
+      <th> Food Name </th> 
+      <th> Location </th>
+      <th> Deal Type </th>
+      <th> Start Time </th>
+      <th> End Time </th>
+      <th> Food Type </th>
+    </tr>
+  	<% @deals_within_proximity.each do |deal| %>
+      <% cache(cache_key_for_timeline_deal(deal)) do %>
+    	  <tr style="background-color: #FFFFFF">
+          <td> <%= deal.food_name %> </td>
+          <td> <%= deal.address %></td>
+          <td> <%= deal.deal_type %></td>
+          <td> <%= deal.start_time.strftime("%B %d, %Y at %I:%M%p %Z") %> </td>
+          <td> <%= deal.end_time.strftime("%B %d, %Y at %I:%M%p %Z") %> </td>
+          <td> <%= deal.food_type %></td>
+    	  </tr>
+  	    <% end %>
+      <% end %>
+  </table>	  
+<% end %>
 
 <%= will_paginate @deals_within_proximity %>  
 

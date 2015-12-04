@@ -1,7 +1,7 @@
 class DealsController < ApplicationController
 
   #before_filter :authorize, :only => [:create, :new, :show, :edit, :update, :destroy, :update_view_count]
-  skip_before_filter :verify_authenticity_token
+  skip_before_filter :verify_authenticity_token #Get rid of this when turning in!!!!
   def create
     deal = Deal.new(formatted_deal_params, views: 0, shares: 0, purchases: 0)
     deal.user_id = current_user.id
@@ -10,7 +10,7 @@ class DealsController < ApplicationController
     redirect_to "/users/#{current_user.id}/deals"
     else
       flash[:error] = deal.errors.full_messages.to_sentence
-      redirect_to "/users/#{current_user.id}/deals"
+      redirect_to "/users/#{current_user.id}/create_deal"
     end
   end 
 
@@ -21,7 +21,7 @@ class DealsController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
-    @deals = @user.deals
+    @deals = @user.deals.paginate(:page => params[:page], :per_page => 10)
     render 'show'
   end
 
@@ -40,14 +40,6 @@ class DealsController < ApplicationController
   rescue
     flash[:error] = deal.errors.full_messages.to_sentence
     redirect_to "/users/#{current_user.id}/deals/#{deal.id}"
-  end
-
-  def destroy_all_deals
-    deals = Deal.all
-    deals.each do |deal|
-      deal.destroy!
-    end
-    redirect_to '/'
   end
 
   def destroy_all

@@ -1,22 +1,20 @@
 class UsersController < ApplicationController
 
   # before_filter :authorize, :only => [:show, :edit, :update]
-  skip_before_filter :verify_authenticity_token
+  skip_before_filter :verify_authenticity_token #get rid when turning in final!!!
 
   def new
-    # Render the login view
+    
   end
 
   def show
     @user = User.find_by(:id => params[:id])
     render "show"
-    # Render the user info page view
   end
 
   def edit
     @user = User.find_by(:id => params[:id])
     render "edit"
-    # Allow a user to change the data about their account
   end
 
   def update
@@ -30,14 +28,6 @@ class UsersController < ApplicationController
       flash[:error] = user.errors.full_messages.to_sentence
       redirect_to "/users/#{user.id}/edit"
     end
-  end
-  
-  def destroy_all_users
-    users = User.all
-    users.each do |user|
-      user.destroy!
-    end
-    redirect_to "/"
   end
 
   def create
