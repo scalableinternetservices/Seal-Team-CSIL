@@ -20,8 +20,7 @@
 <%end%>
 
 <br><br>
-<div class="table-responsive" style="width:90%;margin-left: auto;margin-right: auto;">
- <% cache(cache_key_for_timeline_deal_table) do %>  
+<div class="table-responsive" style="width:90%;margin-left: auto;margin-right: auto;"> 
   <table class = "table">
   	<tr style="background-color: #F2D34D"> 
       <th> Food Name </th> 
@@ -44,7 +43,6 @@
   	    <% end %>
       <% end %>
   </table>	  
-<% end %>
 
 <%= will_paginate @deals_within_proximity %>  
 
