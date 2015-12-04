@@ -16,7 +16,7 @@ FOOD_NAMES = [ 'Cheese Pizza', 'Hamburger', 'Cheese Burger', 'Hotdog', 'Icee', '
 num_users = 100
 deal_id_count = 1
 
-num_users.times do |user_number|
+(1..num_users).each do |user_number|
 	a = User.create!(name: "user#{user_number}", 
 		email: "user#{user_number}@foodfinder.com", 
 		password: "password#{user_number}", 

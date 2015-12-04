@@ -3,7 +3,7 @@ class TimelineController < ApplicationController
   def show
     @lat = Rails.cache.fetch('lat').to_f
     @lng = Rails.cache.fetch('lng').to_f
-    @distance_miles = 5.0
+    @distance_miles = 1.0
     @deals_within_proximity = Deal.where("sqrt(power(#{@lat}-latitude,2) + power(#{@lng}-longitude,2)) < #{0.0164 * @distance_miles}").paginate(:page => params[:page], :per_page => 10)
 
     render 'show'

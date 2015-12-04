@@ -58,6 +58,7 @@ function initMap(mapOptions) {
     handler.buildMap({ provider: mapOptions, internal: {id: 'map_canvas'}}, function(){
       addMarkers(handler)
       google.maps.event.addListener(handler.getMap(), 'idle', function() {
+        window["countClicks"] = 1
         addMarkers(handler)
       });
       document.getElementById("click").addEventListener("click", function(){
