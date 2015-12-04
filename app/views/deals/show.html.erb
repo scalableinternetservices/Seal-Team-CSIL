@@ -17,7 +17,7 @@
         <th> Delete </th>
       </tr>
       <% @deals.each do |deal| %>
-        <% cache(cache_key_for_user_deal(deal))
+        <% cache(cache_key_for_user_deal(deal)) do %>
           <tr style="background-color: #FFFFFF">
             <td> <%= deal.food_name %> </td>
             <td> <%= deal.address %></td>
