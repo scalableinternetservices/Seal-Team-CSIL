@@ -15,7 +15,7 @@ class GraphController < ApplicationController
 
       marker.lat deal.latitude
       marker.lng deal.longitude
-      imageURL = deal.user.avatar.path ? deal.user.avatar : "/assets/NoImage.png"
+      imageURL = deal.user.avatar.path ? deal.user.avatar : "#{asset_path '/assets/NoImage.png'}"
       marker.infowindow createInfoWindow(deal, imageURL)
 
     end
