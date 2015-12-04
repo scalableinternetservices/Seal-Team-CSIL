@@ -35,7 +35,7 @@ class TimelineController < ApplicationController
 
   	Deal.all.each do |deal|
   		if coordinate_distance([deal.latitude, deal.longitude],[@lat,@lng]) <= distance_meters
-        if deal.food_type == params[:food_type]
+        if (params[:food_type] == 'Any') || (deal.food_type == params[:food_type])
   			  @deals_within_proximity.append(deal)
         end
   		end

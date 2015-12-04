@@ -14,7 +14,7 @@
   </div>
   <div class="form-group", style="width:35%;margin-left: auto;margin-right: auto;">
     <b>Food Type:</b>
-    <%= select_tag :food_type, options_for_select( Deal::FOOD_TYPES ) %>
+    <%= select_tag :food_type, options_for_select( ['Any'] + Deal::FOOD_TYPES ) %>
   </div>
   <p class="center" style="padding-bottom:30px;"><%= submit_tag "Search" %> | <%= link_to "Reset", reset_deals_path %></p>
 <%end%>
