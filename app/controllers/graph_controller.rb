@@ -15,9 +15,8 @@ class GraphController < ApplicationController
 
       marker.lat deal.latitude
       marker.lng deal.longitude
-      imageURL = deal.user.avatar.path ? deal.user.avatar : "#{asset_path '/assets/NoImage.png'}"
-      marker.infowindow createInfoWindow(deal, imageURL)
-
+      window = deal.user.avatar.path ? createInfoWindowWithImage(deal) : createInfoWindowWithoutImage(deal)
+      marker.infowindow window
     end
     respond_to do |format|
       format.json { render :json => hash, :layout => false}

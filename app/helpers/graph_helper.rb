@@ -1,8 +1,15 @@
 module GraphHelper
 
-  def createInfoWindow(deal, imageURL)
+  def createInfoWindowWithImage(deal)
+    "<img src='#{deal.user.avatar}' style = 'max-height: 150px; max-width: 150px;' />" + createBaseInfoWindow(deal)
+  end
+
+  def createInfoWindowWithoutImage(deal)
+    createBaseInfoWindow(deal)
+  end
+
+  def createBaseInfoWindow(deal)
     "
-    <img src='#{imageURL}' style = 'max-height: 150px; max-width: 150px;' />
     <div><b>Restaurant: #{deal.user.name} </div>
     </br>
     <div> Food: #{deal.food_name} </div>
@@ -16,4 +23,6 @@ module GraphHelper
     <div hidden> deal_id: #{deal.id}</div>
     "
   end
+
+
 end
