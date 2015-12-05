@@ -5,7 +5,6 @@
     <b>Address:</b>
     <% lat_lng_present = Rails.cache.fetch( 'lat' ).present? & Rails.cache.fetch( 'lng' ).present? %>
     <% address_data = lat_lng_present ? Geocoder.search( Rails.cache.fetch( 'lat' ) + ',' + Rails.cache.fetch( 'lng' ) )[ 0 ].data["formatted_address"] : '' %>
-    <% coord_data = lat_lng_present ? Rails.cache.fetch( 'lat' ) + ',' + Rails.cache.fetch( 'lng' ) : '' %>
     <%= text_field_tag :street_address, nil, value: address_data, size: 40 %>
   </div>
   <div class="form-group", style="width:35%;margin-left: auto;margin-right: auto;">

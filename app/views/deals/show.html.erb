@@ -2,8 +2,11 @@
 <div class='center' style="padding-top: 60px;">
   <b>Total Deals: <%=@deals.count%></b><br><br>
 </div>
+
+<%= @page %>
+
 <div class="table-responsive" style="width:90%;margin-left: auto;margin-right: auto;">
-  <% cache(cache_key_for_user_deal_table) do %>  
+  <% cache(cache_key_for_user_deal_table(@user, @page)) do %>  
     <table class="table">
       <tr style="background-color: #F2D34D">
         <th> Food Name </th> 
