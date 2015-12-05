@@ -3,7 +3,6 @@ class CreateDeals < ActiveRecord::Migration
     create_table :deals do |t|
       t.belongs_to :user
       t.string   :food_name
-      t.text     :description
       t.string   :address
       t.string   :deal_type
       t.datetime :start_time

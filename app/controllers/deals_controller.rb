@@ -23,7 +23,6 @@ class DealsController < ApplicationController
     @user = User.find_by(id: params[:id])
     @deals = @user.deals.paginate(:page => params[:page], :per_page => 10)
     @page = params[:page]
-    puts params[:page]
     render 'show'
   end
 
@@ -35,7 +34,7 @@ class DealsController < ApplicationController
 
   def update
     deal = Deal.find_by(:id => params[:deal_id])
-    deal.update(deals_params)
+    deal.update(deal_params)
     deal.save!
     flash[:success] = "Deal has been updated!"
     redirect_to "/users/#{current_user.id}/deals"
@@ -45,10 +44,10 @@ class DealsController < ApplicationController
   end
 
   def destroy_all
-    user = User.find_by(id: params[:user_id])
-    deals = user.deals
-    deals.each do |deal| 
-      deal.destroy!
+    if(User.find_by(id: params[:user_id]).deals.destroy_all)
+      flash[:success] = "All deals have been deleted!"
+    else
+      flash[:error] = "Something went wrong in deleting all deals!"
     end
     redirect_to "/users/#{current_user.id}/deals"
   end
@@ -71,21 +70,16 @@ class DealsController < ApplicationController
 
   private
 
-    def formatted_deal_params
-        form_params = params.require(:deal).permit(:food_name, :description, :lat_lng, :street_address, :city, :zip_code, :state, :deal_type, :start_time, :end_time, :food_type, :avatar)
-
-        if form_params[ :lat_lng ].present?
-          form_params[ :address ]   = Geocoder.search( form_params[ :lat_lng ] )[ 0 ].data[ "formatted_address" ]
-        else
-          full_address              = form_params[ :street_address ] + ' ' + form_params[ :city ] + ' ' + form_params[ :zip_code ] + ' ' + form_params[ :state ]
-          form_params[ :address ]   = full_address
-        end
-        form_params.except!( 'lat_lng', 'street_address', 'city', 'zip_code', 'state' )
-        form_params
+    def deal_params
+      params.require( :deal ).permit( :food_name, :description, :address, :deal_type, :start_time, :end_time, :food_type, :avatar )
     end
 
-    def deals_params
-      params.require( :deal ).permit( :food_name, :description, :address, :deal_type, :start_time, :end_time, :food_type, :avatar )
+    def formatted_deal_params
+      form_params = params.require(:deal).permit(:food_name, :street_address, :city, :zip_code, :state, :deal_type, :start_time, :end_time, :food_type, :avatar)
+      full_address = form_params[ :street_address ] + ' ' + form_params[ :city ] + ' ' + form_params[ :zip_code ] + ' ' + form_params[ :state ]
+      form_params[ :address ] = full_address
+      form_params.except!( 'street_address', 'city', 'zip_code', 'state' )
+      form_params
     end
 
 end

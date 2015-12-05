@@ -4,6 +4,6 @@ module DealsHelper
   end
   
   def cache_key_for_user_deal_table(user, page)
-    "timeline_deal_table/#{user.id}/#{page}/#{User.maximum(:updated_at)}/#{Deal.maximum(:updated_at)}"
+    "timeline_deal_table/#{user.id}/#{page}/#{User.maximum(:updated_at)}/#{Deal.maximum(:updated_at)}/#{Deal.count}"
   end
 end

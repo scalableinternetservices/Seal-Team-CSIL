@@ -1,9 +1,9 @@
-<%= image_tag "#{asset_path 'IslaVistaFoodFinderTimelineView.png'}", class: "style_logo" %>
+<%= image_tag "IslaVistaFoodFinderTimelineView.png", class: "style_logo" %>
 
 <%= form_tag('/timeline/load_deals', :method => :get) do %>
   <div class="form-group", style="width:35%;margin-left: auto;margin-right: auto;padding-top: 80px">
     <b>Address:</b>
-    <% lat_lng_present = Rails.cache.fetch( 'lat' ).present? & Rails.cache.fetch( 'lng' ).present? %>
+    <% lat_lng_present = Rails.cache.fetch( 'lat' ).present? && Rails.cache.fetch( 'lng' ).present? %>
     <% address_data = lat_lng_present ? Geocoder.search( Rails.cache.fetch( 'lat' ) + ',' + Rails.cache.fetch( 'lng' ) )[ 0 ].data["formatted_address"] : '' %>
     <%= text_field_tag :street_address, nil, value: address_data, size: 40 %>
   </div>

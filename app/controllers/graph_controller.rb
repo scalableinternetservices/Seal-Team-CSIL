@@ -12,7 +12,6 @@ class GraphController < ApplicationController
     lng = params[:lng].to_f
     deals = Deal.where("sqrt(power(#{lat}-latitude,2) + power(#{lng}-longitude,2)) < 0.0164").limit(num)
     hash = Gmaps4rails.build_markers(deals) do |deal, marker|
-
       marker.lat deal.latitude
       marker.lng deal.longitude
       window = deal.user.avatar.path ? createInfoWindowWithImage(deal) : createInfoWindowWithoutImage(deal)

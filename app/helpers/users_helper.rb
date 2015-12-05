@@ -53,6 +53,6 @@ module UsersHelper
       'West Virginia',
       'Wisconsin',
       'Wyoming'
-    ]
-end
+  ]
+  end
 end
