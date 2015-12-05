@@ -3,8 +3,6 @@
   <b>Total Deals: <%=@deals.count%></b><br><br>
 </div>
 
-<%= @page %>
-
 <div class="table-responsive" style="width:90%;margin-left: auto;margin-right: auto;">
   <% cache(cache_key_for_user_deal_table(@user, @page)) do %>  
     <table class="table">
