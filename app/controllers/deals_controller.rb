@@ -21,7 +21,8 @@ class DealsController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
-    @deals = @user.deals.paginate(:page => params[:page], :per_page => 10)
+    # @deals = @user.deals.paginate(:page => params[:page], :per_page => 10)
+    @deals = @user.deals.all
     render 'show'
   end
 

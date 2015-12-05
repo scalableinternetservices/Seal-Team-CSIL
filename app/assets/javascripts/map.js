@@ -23,11 +23,13 @@ function getViewerLocation(lat, lng){
         zoom: 16};
     initMap(mapOptions);
 }
-function getMarkers(lat, lng, num){
+// function getMarkers(lat, lng, num){
+function getMarkers(lat, lng){
     return $.ajax({
         url: "graph/load_local_deals",
         type: "GET",
-        data: {lat: lat, lng: lng, num: num},
+        // data: {lat: lat, lng: lng, num: num},
+        data: {lat: lat, lng: lng},
         dataType: 'json'
     });
 }
@@ -41,7 +43,8 @@ function updateCount(deal_id, count_type){
 }
 
 function addMarkers(handler){
-  getMarkers(handler.getMap().getCenter().lat(), handler.getMap().getCenter().lng(), window["countClicks"]).done(function(result) {
+  // getMarkers(handler.getMap().getCenter().lat(), handler.getMap().getCenter().lng(), window["countClicks"]).done(function(result) {
+    getMarkers(handler.getMap().getCenter().lat(), handler.getMap().getCenter().lng()).done(function(result) {
     result.map(function(m){
       marker = handler.addMarker(m);
       google.maps.event.addListener(marker.getServiceObject(), 'click', function(){
@@ -58,11 +61,11 @@ function initMap(mapOptions) {
     handler.buildMap({ provider: mapOptions, internal: {id: 'map_canvas'}}, function(){
       addMarkers(handler)
       google.maps.event.addListener(handler.getMap(), 'idle', function() {
-        window["countClicks"] = 1
+        // window["countClicks"] = 1
         addMarkers(handler)
       });
-      document.getElementById("click").addEventListener("click", function(){
-        addMarkers(handler)
-      });
+      // document.getElementById("click").addEventListener("click", function(){
+      //   addMarkers(handler)
+      // });
     });
 }

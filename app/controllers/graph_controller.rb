@@ -7,10 +7,11 @@ class GraphController < ApplicationController
   end
 
   def load_local_deals
-    num = params[:num]
+    # num = params[:num]
     lat = params[:lat].to_f
     lng = params[:lng].to_f
-    deals = Deal.where("sqrt(power(#{lat}-latitude,2) + power(#{lng}-longitude,2)) < 0.0164").limit(num)
+    # deals = Deal.where("sqrt(power(#{lat}-latitude,2) + power(#{lng}-longitude,2)) < 0.0164").limit(num)
+    deals = Deal.where("sqrt(power(#{lat}-latitude,2) + power(#{lng}-longitude,2)) < 0.0164")
     hash = Gmaps4rails.build_markers(deals) do |deal, marker|
 
       marker.lat deal.latitude

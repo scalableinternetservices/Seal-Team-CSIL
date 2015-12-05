@@ -55,7 +55,7 @@ gem 'StreetAddress', :require => "street_address"
 gem 'phony_rails'
 
 #Gem for making pages of the timeline view page.
-gem 'will_paginate'
+# gem 'will_paginate'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
