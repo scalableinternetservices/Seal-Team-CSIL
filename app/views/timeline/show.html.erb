@@ -1,11 +1,21 @@
+<% content_for :javascript_includes do %>
+    <%= javascript_include_tag "map.js" %>
+<% end %>
+
 <%= image_tag "#{asset_path 'IslaVistaFoodFinderTimelineView.png'}", class: "style_logo" %>
 
 <%= form_tag('/timeline/load_deals', :method => :get) do %>
   <div class="form-group", style="width:35%;margin-left: auto;margin-right: auto;padding-top: 80px">
     <b>Address:</b>
-    <% lat_lng_present = Rails.cache.fetch( 'lat' ).present? & Rails.cache.fetch( 'lng' ).present? %>
-    <% address_data = lat_lng_present ? Geocoder.search( Rails.cache.fetch( 'lat' ) + ',' + Rails.cache.fetch( 'lng' ) )[ 0 ].data["formatted_address"] : '' %>
-    <% coord_data = lat_lng_present ? Rails.cache.fetch( 'lat' ) + ',' + Rails.cache.fetch( 'lng' ) : '' %>
+
+<!--     <% lat_lng_present = Rails.cache.fetch( 'lat' ).present? & Rails.cache.fetch( 'lng' ).present? %>
+    <% address_data = lat_lng_present ? Geocoder.search( Rails.cache.fetch( 'lat' ) + ',' + Rails.cache.fetch( 'lng' ) )[ 0 ].data["formatted_address"] : '' %> -->
+
+    <script type="text/javascript">
+      findUser();
+    </script>
+
+    <% address_data = Geocoder.search( Rails.cache.fetch( 'lat' ) + ',' + Rails.cache.fetch( 'lng' ) )[ 0 ].data["formatted_address"] %>
     <%= text_field_tag :street_address, nil, value: address_data, size: 40 %>
   </div>
   <div class="form-group", style="width:35%;margin-left: auto;margin-right: auto;">
@@ -31,7 +41,7 @@
       <th> Food Type </th>
     </tr>
   	<% @deals_within_proximity.each do |deal| %>
-      <% cache(cache_key_for_timeline_deal(deal)) do %>
+      <% #cache(cache_key_for_timeline_deal(deal)) do %>
     	  <tr style="background-color: #FFFFFF">
           <td> <%= deal.food_name %> </td>
           <td> <%= deal.address %></td>
@@ -40,8 +50,8 @@
           <td> <%= deal.end_time.strftime("%B %d, %Y at %I:%M%p %Z") %> </td>
           <td> <%= deal.food_type %></td>
     	  </tr>
-  	    <% end %>
-      <% end %>
+  	  <% #end %>
+    <% end %>
   </table>	  
 
 <%= will_paginate @deals_within_proximity %>  

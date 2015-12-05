@@ -3,8 +3,8 @@
   <b>Total Deals: <%=@deals.count%></b><br><br>
 </div>
 <div class="table-responsive" style="width:90%;margin-left: auto;margin-right: auto;">
-  <% cache(cache_key_for_user_deal_table) do %>  
-    <table class="table">
+  <% #cache(cache_key_for_user_deal_table) do %>
+    <table class="table"> 
       <tr style="background-color: #F2D34D">
         <th> Food Name </th> 
         <th> Location </th>
@@ -17,7 +17,7 @@
         <th> Delete </th>
       </tr>
       <% @deals.each do |deal| %>
-        <% cache(cache_key_for_user_deal(deal)) do %>
+        <% #cache(cache_key_for_user_deal(deal)) do %>
           <tr style="background-color: #FFFFFF">
             <td> <%= deal.food_name %> </td>
             <td> <%= deal.address %></td>
@@ -29,10 +29,10 @@
             <td> <%= link_to "Edit Deal", edit_deal_path(user_id: current_user.id, deal_id: deal.id) %> </td>
             <td> <%= link_to "Delete Deal", delete_deal_path(user_id: current_user.id, deal_id: deal.id), method: "delete" %> </td>
           </tr>
-        <% end %>
+        <% #end %>
       <% end %>
     </table>
-  <% end %>
+  <% #end %>
 </div>
 
 <%= will_paginate @deals_within_proximity %> 
