@@ -11,25 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151024205824) do
+ActiveRecord::Schema.define(version: 20151205231350) do
 
   create_table "deals", force: :cascade do |t|
-    t.integer  "user_id",     limit: 4
-    t.string   "food_name",   limit: 255
-    t.text     "description", limit: 65535
-    t.string   "address",     limit: 255
-    t.string   "deal_type",   limit: 255
+    t.integer  "user_id",    limit: 4
+    t.string   "food_name",  limit: 255
+    t.string   "address",    limit: 255
+    t.string   "deal_type",  limit: 255
     t.datetime "start_time"
     t.datetime "end_time"
-    t.string   "food_type",   limit: 255
-    t.float    "latitude",    limit: 24
-    t.float    "longitude",   limit: 24
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-    t.integer  "views",       limit: 4,     default: 0
-    t.integer  "shares",      limit: 4,     default: 0
-    t.integer  "purchases",   limit: 4,     default: 0
+    t.string   "food_type",  limit: 255
+    t.float    "latitude",   limit: 24
+    t.float    "longitude",  limit: 24
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.integer  "views",      limit: 4,   default: 0
   end
+
+  add_index "deals", ["latitude"], name: "index_deals_on_latitude", using: :btree
+  add_index "deals", ["longitude"], name: "index_deals_on_longitude", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name",                limit: 255
@@ -38,10 +38,6 @@ ActiveRecord::Schema.define(version: 20151024205824) do
     t.string   "food_type",           limit: 255
     t.string   "address",             limit: 255
     t.string   "phone_number",        limit: 255
-    t.string   "hours",               limit: 255
-    t.string   "delivery",            limit: 255
-    t.float    "latitude",            limit: 24
-    t.float    "longitude",           limit: 24
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.string   "website",             limit: 255

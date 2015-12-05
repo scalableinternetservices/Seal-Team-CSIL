@@ -13,7 +13,7 @@ FOOD_TYPES = [ 'American','Mexican','Italian','Asian','French' ]
 DEAL_TYPES = [ 'Free','Buy One Get One Free','Buy One Get One Half Off','Flash Deal' ]
 FOOD_NAMES = [ 'Cheese Pizza', 'Hamburger', 'Cheese Burger', 'Hotdog', 'Icee', 'Pasta', 'Sausage', 'Chicken Bowl']
 #create 10,000 users
-num_users = 100
+num_users = 1000
 deal_id_count = 1
 
 (1..num_users).each do |user_number|
