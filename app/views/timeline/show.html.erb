@@ -3,8 +3,7 @@
 <%= form_tag('/timeline/load_deals', :method => :get) do %>
   <div class="form-group", style="width:35%;margin-left: auto;margin-right: auto;padding-top: 80px">
     <b>Address:</b>
-    <% lat_lng_present = Rails.cache.fetch( 'lat' ).present? && Rails.cache.fetch( 'lng' ).present? %>
-    <% address_data = lat_lng_present ? Geocoder.search( Rails.cache.fetch( 'lat' ) + ',' + Rails.cache.fetch( 'lng' ) )[ 0 ].data["formatted_address"] : '' %>
+    <% address_data = Geocoder.search( get_lat + ',' + get_lng )[ 0 ].data["formatted_address"] %>
     <%= text_field_tag :street_address, nil, value: address_data, size: 40 %>
   </div>
   <div class="form-group", style="width:35%;margin-left: auto;margin-right: auto;">

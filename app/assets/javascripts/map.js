@@ -10,12 +10,22 @@ function findUser(){
                 type: "POST",
                 data: {lat: position.coords.latitude, lng: position.coords.longitude}
             });
-            console.log("sent location");
             initMap(mapOptions)
+        },
+        function (error) {
+            if (error.code == error.PERMISSION_DENIED) {
+                console.log("location denied");
+                var mapOptions = {
+                    center: new google.maps.LatLng(34.413347, -119.855441),
+                    zoom: 16
+                };
+                initMap(mapOptions)
+            }
         });
     }
     else {
-        alert("Please use a browser that supports HTML5")}
+        alert("Please use a browser that supports HTML5")
+    }
 }
 function getViewerLocation(lat, lng){
     var mapOptions = {
@@ -53,7 +63,6 @@ function addMarkers(handler){
 }
 
 function initMap(mapOptions) {
-    console.log("building map");
     handler = Gmaps.build('Google');
     handler.buildMap({ provider: mapOptions, internal: {id: 'map_canvas'}}, function(){
       addMarkers(handler)
