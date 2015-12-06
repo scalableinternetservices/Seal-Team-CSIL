@@ -24,5 +24,4 @@ module GraphHelper
     "
   end
 
-
 end
