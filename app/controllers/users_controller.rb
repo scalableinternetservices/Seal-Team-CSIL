@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  # before_filter :authorize, :only => [:show, :edit, :update]
+  before_filter :authorize, :only => [:show, :edit, :update]
   skip_before_filter :verify_authenticity_token #get rid when turning in final!!!
 
   def new
