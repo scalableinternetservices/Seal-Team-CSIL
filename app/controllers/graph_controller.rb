@@ -2,8 +2,8 @@ class GraphController < ApplicationController
   include GraphHelper
 
   def show
-    @lat = get_lat(request.remote_ip.to_s)
-    @lng = get_lat(request.remote_ip.to_s)
+    @lat = Rails.cache.fetch('lat' + request.remote_ip.to_s)
+    @lng = Rails.cache.fetch('lng' + request.remote_ip.to_s)
   end
 
   def load_local_deals
