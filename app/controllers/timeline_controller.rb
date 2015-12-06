@@ -11,8 +11,8 @@ class TimelineController < ApplicationController
     # render 'show'
     # Render timeline and pass all necessary info to the view.
     @deals_within_proximity = []
-    lat = get_lat
-    lng = get_lng
+    lat = get_lat(request.remote_ip.to_s)
+    lng = get_lng(request.remote_ip.to_s)
     distance_miles = 1.0
     distance_meters = distance_miles * 1609.34
     Deal.all.each do |deal|
@@ -49,7 +49,7 @@ class TimelineController < ApplicationController
     elsif params[ :lat_lng ].present?
       location = Geocoder.search( params[ :lat_lng ] )
     else
-      location = Geocoder.search( Rails.cache.fetch('lat') + ',' + Rails.cache.fetch('lng') )
+      location = Geocoder.search( Rails.cache.fetch('lat' + request.remote_ip.to_s) + ',' + Rails.cache.fetch('lng' + request.remote_ip.to_s) )
     end
 
     @deals_within_proximity = []
@@ -72,13 +72,13 @@ end
 private
 
   def get_address_data
-    lat_lng_present = Rails.cache.fetch( 'lat' ).present? && Rails.cache.fetch( 'lng' ).present?
+    lat_lng_present = Rails.cache.fetch( 'lat' + request.remote_ip.to_s ).present? && Rails.cache.fetch( 'lng' + request.remote_ip.to_s ).present?
     address_valid = false
     if lat_lng_present
-      geocoder_result = Geocoder.search( Rails.cache.fetch( 'lat' ) + ',' + Rails.cache.fetch( 'lng' ) )
+      geocoder_result = Geocoder.search( Rails.cache.fetch( 'lat' + request.remote_ip.to_s ) + ',' + Rails.cache.fetch( 'lng' + request.remote_ip.to_s ) )
       address_valid = geocoder_result.blank? ? false : true
     end
-    address_data = address_valid ? geocoder_result[ 0 ].data["formatted_address"] : Geocoder.search( get_lat + ',' + get_lng )[ 0 ].data["formatted_address"]
+    address_data = address_valid ? geocoder_result[ 0 ].data["formatted_address"] : Geocoder.search( get_lat(request.remote_ip.to_s) + ',' + get_lng(request.remote_ip.to_s) )[ 0 ].data["formatted_address"]
   end
 
   def coordinate_distance(loc1, loc2)

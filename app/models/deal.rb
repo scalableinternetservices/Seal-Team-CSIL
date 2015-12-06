@@ -20,7 +20,7 @@ class Deal < ActiveRecord::Base
 
   belongs_to :user
   validates :food_name, :address, :food_type, :start_time, :end_time, presence: true
-  geocoded_by      :address
-  after_validation :geocode
+  # geocoded_by      :address
+  # after_validation :geocode
 
 end

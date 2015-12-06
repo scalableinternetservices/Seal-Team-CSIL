@@ -3,20 +3,20 @@ module TimelineHelper
   #   "deal/#{deal.id}/#{deal.updated_at}"
   # end
   
-  def get_lat
-    if Rails.cache.fetch('lat') == nil
+  def get_lat(ip)
+    if Rails.cache.fetch('lat' + ip) == nil
       lat = '34.413347'
     else
-      lat = Rails.cache.fetch('lat')
+      lat = Rails.cache.fetch('lat' + ip, expires_in: 12.hours)
     end
     lat
   end
 
-  def get_lng
-    if Rails.cache.fetch('lng') == nil
+  def get_lng(ip)
+    if Rails.cache.fetch('lng' + ip) == nil
       lng = '-119.855441'
     else
-      lng = Rails.cache.fetch('lng')
+      lng = Rails.cache.fetch('lng' + ip, expires_in: 12.hours)
     end
     lng
   end

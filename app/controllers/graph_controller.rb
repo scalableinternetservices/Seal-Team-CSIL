@@ -2,8 +2,8 @@ class GraphController < ApplicationController
   include GraphHelper
 
   def show
-    @lat = Rails.cache.fetch('lat')
-    @lng = Rails.cache.fetch('lng')
+    @lat = Rails.cache.fetch('lat' + request.remote_ip.to_s, expires_in: 12.hours)
+    @lng = Rails.cache.fetch('lng' + request.remote_ip.to_s, expires_in: 12.hours)
   end
 
   def load_local_deals
@@ -46,8 +46,8 @@ class GraphController < ApplicationController
 
   def save_user_location
     render :nothing => true
-    Rails.cache.fetch('lat') {params[:lat]}
-    Rails.cache.fetch('lng') {params[:lng]}
+    Rails.cache.fetch('lat' + request.remote_ip.to_s, expires_in: 12.hours) {params[:lat]}
+    Rails.cache.fetch('lng' + request.remote_ip.to_s, expires_in: 12.hours) {params[:lng]}
   end
 
   private
