@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
 
   has_many :deals, dependent: :destroy
   
-  validates         :name, :address, :password, :password_confirmation, presence: true
+  validates         :name, :password, :password_confirmation, presence: true
   validates         :email, email: true
   validates         :phone_number, phony_plausible: true
   has_attached_file :avatar
