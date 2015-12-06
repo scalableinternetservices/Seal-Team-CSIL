@@ -4,7 +4,7 @@ class DealsController < ApplicationController
   skip_before_filter :verify_authenticity_token #Get rid of this when turning in!!!!
   def create
     # deal = Deal.new(formatted_deal_params, views: 0, shares: 0, purchases: 0)
-    deal = Deal.new(deal_params, views: 0, shares: 0, purchases: 0)
+    deal = Deal.new(deal_params, views: 0)
     deal.user_id = current_user.id
     if deal.save
     flash[:success] = "Deal has been created!"
@@ -72,7 +72,7 @@ class DealsController < ApplicationController
   private
 
     def deal_params
-      params.require( :deal ).permit( :food_name, :description, :deal_type, :latitude, :longitude, :start_time, :end_time, :food_type, :avatar )
+      params.require( :deal ).permit( :food_name, :deal_type, :latitude, :longitude, :start_time, :end_time, :food_type, :avatar )
     end
 
     def formatted_deal_params
