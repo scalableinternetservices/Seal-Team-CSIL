@@ -31,7 +31,7 @@ class TimelineController < ApplicationController
     lat_lng_present = Rails.cache.fetch('lat' + request.remote_ip.to_s).present? && Rails.cache.fetch('lng'+ request.remote_ip.to_s).present?
     address_valid = false
     if lat_lng_present
-      geocoder_result = Geocoder.search( Rails.cache.fetch('lat'+ request.remote_ip.to_s) + ',' + Rails.cache.fetch('lng'+ request.remote_ip.to_s ) )
+      geocoder_result = Geocoder.search( get_lat(request.remote_ip.to_s) + ',' + get_lng(request.remote_ip.to_s) )
       address_valid = geocoder_result[0].nil? ? false : true
     end
     address_data = address_valid ? geocoder_result[ 0 ].data["formatted_address"] : Geocoder.search( get_lat(request.remote_ip.to_s) + ',' + get_lng(request.remote_ip.to_s) )[ 0 ].data["formatted_address"]
