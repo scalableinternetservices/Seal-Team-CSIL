@@ -11,43 +11,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151024205824) do
+ActiveRecord::Schema.define(version: 20151205231350) do
 
   create_table "deals", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "food_name"
-    t.text     "description"
-    t.string   "address"
-    t.string   "deal_type"
+    t.integer  "user_id",    limit: 4
+    t.string   "food_name",  limit: 255
+    t.string   "address",    limit: 255
+    t.string   "deal_type",  limit: 255
     t.datetime "start_time"
     t.datetime "end_time"
-    t.string   "food_type"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "views",       default: 0
-    t.integer  "shares",      default: 0
-    t.integer  "purchases",   default: 0
+    t.string   "food_type",  limit: 255
+    t.float    "latitude",   limit: 24
+    t.float    "longitude",  limit: 24
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.integer  "views",      limit: 4,   default: 0
   end
 
+  add_index "deals", ["latitude"], name: "index_deals_on_latitude", using: :btree
+  add_index "deals", ["longitude"], name: "index_deals_on_longitude", using: :btree
+
   create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "password_digest"
-    t.string   "food_type"
-    t.string   "address"
-    t.string   "phone_number"
-    t.string   "hours"
-    t.string   "delivery"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.string   "website"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
+    t.string   "name",                limit: 255
+    t.string   "email",               limit: 255
+    t.string   "password_digest",     limit: 255
+    t.string   "food_type",           limit: 255
+    t.string   "address",             limit: 255
+    t.string   "phone_number",        limit: 255
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "website",             limit: 255
+    t.string   "avatar_file_name",    limit: 255
+    t.string   "avatar_content_type", limit: 255
+    t.integer  "avatar_file_size",    limit: 4
     t.datetime "avatar_updated_at"
   end
 

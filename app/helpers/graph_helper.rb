@@ -1,15 +1,28 @@
 module GraphHelper
 
-  def createInfoWindow(deal)
-    "<div><b>#{deal.user.name} #{deal.user.food_type}</div>
-    </br>
-
-    <div> <i> #{deal.food_name} </i> </div>
-    <div> #{deal.food_type} </div>
-    <div> #{deal.deal_type} </div>
-    <div>Start Time: #{deal.start_time} </div>
-    <div>End Time: #{deal.end_time}</div>
-    <div> <a href=#{deal.user.website}> Website: </div>
-    <div hidden> deal_id: #{deal.id}</div>"
+  def createInfoWindowWithImage(deal)
+    "<img src='#{deal.user.avatar}' style = 'max-height: 150px; max-width: 150px;' />" + createBaseInfoWindow(deal)
   end
+
+  def createInfoWindowWithoutImage(deal)
+    createBaseInfoWindow(deal)
+  end
+
+  def createBaseInfoWindow(deal)
+    "
+    <div><b>Restaurant: #{deal.user.name} </div>
+    </br>
+    <div> Food: #{deal.food_name} </div>
+    <div> Type Of Food: #{deal.food_type} </div>
+    <div> Deal Type: #{deal.deal_type} </div>
+    </br>
+    <div> Start Time: #{deal.start_time.strftime("%m-%d-%Y at %I:%M%p")} </div>
+    <div> End Time: #{deal.end_time.strftime("%m-%d-%Y at %I:%M%p")}</div>
+    </br>
+    <div> Website: #{deal.user.website} </div>
+    <div hidden> deal_id: #{deal.id}</div>
+    "
+  end
+
+
 end

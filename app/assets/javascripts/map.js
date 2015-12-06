@@ -10,12 +10,22 @@ function findUser(){
                 type: "POST",
                 data: {lat: position.coords.latitude, lng: position.coords.longitude}
             });
-            console.log("sent location");
             initMap(mapOptions)
+        },
+        function (error) {
+            if (error.code == error.PERMISSION_DENIED) {
+                console.log("location denied");
+                var mapOptions = {
+                    center: new google.maps.LatLng(34.413347, -119.855441),
+                    zoom: 16
+                };
+                initMap(mapOptions)
+            }
         });
     }
     else {
-        alert("Please use a browser that supports HTML5")}
+        alert("Please use a browser that supports HTML5")
+    }
 }
 function getViewerLocation(lat, lng){
     var mapOptions = {
@@ -23,11 +33,11 @@ function getViewerLocation(lat, lng){
         zoom: 16};
     initMap(mapOptions);
 }
-function getMarkers(lat, lng){
+function getMarkers(lat, lng, num){
     return $.ajax({
         url: "graph/load_local_deals",
         type: "GET",
-        data: {lat: lat, lng: lng},
+        data: {lat: lat, lng: lng, num: num},
         dataType: 'json'
     });
 }
@@ -39,31 +49,29 @@ function updateCount(deal_id, count_type){
         dataType: 'json'
     });
 }
+
+function addMarkers(handler){
+  getMarkers(handler.getMap().getCenter().lat(), handler.getMap().getCenter().lng(), window["countClicks"]).done(function(result) {
+    result.map(function(m){
+      marker = handler.addMarker(m);
+      google.maps.event.addListener(marker.getServiceObject(), 'click', function(){
+        var deal_id = m.infowindow.split("deal_id: ").pop().split('<')[0];
+        updateCount(deal_id, 'view');
+      });
+    });
+  });
+}
+
 function initMap(mapOptions) {
-    console.log("building map");
     handler = Gmaps.build('Google');
     handler.buildMap({ provider: mapOptions, internal: {id: 'map_canvas'}}, function(){
-        getMarkers(handler.getMap().getCenter().lat(), handler.getMap().getCenter().lng()).done(function(result) {
-            result.map(function(m){
-                marker = handler.addMarker(m);
-                google.maps.event.addListener(marker.getServiceObject(), 'click', function(){
-                    //TODO: Clean up HTML parsing
-                    var deal_id = m.infowindow.split("deal_id: ").pop().split('<')[0];
-                    updateCount(deal_id, 'view');
-                });
-            });
-        });
-        google.maps.event.addListener(handler.getMap(), 'idle', function() {
-            getMarkers(handler.getMap().getCenter().lat(), handler.getMap().getCenter().lng()).done(function (result) {
-                result.map(function(m){
-                    marker = handler.addMarker(m);
-                    google.maps.event.addListener(marker.getServiceObject(), 'click', function(){
-                        //TODO: Clean up HTML parsing
-                        var deal_id = m.infowindow.split("deal_id: ").pop().split('<')[0];
-                        updateCount(deal_id, 'view');
-                    });
-                });
-            });
-        });
+      addMarkers(handler)
+      google.maps.event.addListener(handler.getMap(), 'idle', function() {
+        window["countClicks"] = 1
+        addMarkers(handler)
+      });
+      document.getElementById("click").addEventListener("click", function(){
+        addMarkers(handler)
+      });
     });
 }

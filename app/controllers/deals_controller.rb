@@ -1,7 +1,7 @@
 class DealsController < ApplicationController
 
   #before_filter :authorize, :only => [:create, :new, :show, :edit, :update, :destroy, :update_view_count]
-  skip_before_filter :verify_authenticity_token
+  skip_before_filter :verify_authenticity_token #Get rid of this when turning in!!!!
   def create
     deal = Deal.new(formatted_deal_params, views: 0, shares: 0, purchases: 0)
     deal.user_id = current_user.id
@@ -9,8 +9,8 @@ class DealsController < ApplicationController
     flash[:success] = "Deal has been created!"
     redirect_to "/users/#{current_user.id}/deals"
     else
-      flash[:error] = "Something went wrong in creating the deal!"
-      redirect_to "/users/#{current_user.id}/deals"
+      flash[:error] = deal.errors.full_messages.to_sentence
+      redirect_to "/users/#{current_user.id}/create_deal"
     end
   end 
 
@@ -21,7 +21,8 @@ class DealsController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
-    @deals = @user.deals
+    @deals = @user.deals.paginate(:page => params[:page], :per_page => 10)
+    @page = params[:page]
     render 'show'
   end
 
@@ -33,28 +34,20 @@ class DealsController < ApplicationController
 
   def update
     deal = Deal.find_by(:id => params[:deal_id])
-    deal.update(deals_params)
+    deal.update(deal_params)
     deal.save!
     flash[:success] = "Deal has been updated!"
     redirect_to "/users/#{current_user.id}/deals"
   rescue
-    flash[:error] = "Something went wrong in editing the deal!"
-    redirect_to "/users/#{current_user.id}/deals"
-  end
-
-  def destroy_all_deals
-    deals = Deal.all
-    deals.each do |deal|
-      deal.destroy!
-    end
-    redirect_to '/'
+    flash[:error] = deal.errors.full_messages.to_sentence
+    redirect_to "/users/#{current_user.id}/deals/#{deal.id}"
   end
 
   def destroy_all
-    user = User.find_by(id: params[:user_id])
-    deals = user.deals
-    deals.each do |deal| 
-      deal.destroy!
+    if(User.find_by(id: params[:user_id]).deals.destroy_all)
+      flash[:success] = "All deals have been deleted!"
+    else
+      flash[:error] = "Something went wrong in deleting all deals!"
     end
     redirect_to "/users/#{current_user.id}/deals"
   end
@@ -77,21 +70,16 @@ class DealsController < ApplicationController
 
   private
 
-    def formatted_deal_params
-        form_params = params.require(:deal).permit(:food_name, :description, :lat_lng, :street_address, :city, :zip_code, :state, :deal_type, :start_time, :end_time, :food_type, :avatar)
-
-        if form_params[ :lat_lng ].present?
-          form_params[ :address ]   = Geocoder.search( form_params[ :lat_lng ] )[ 0 ].data[ "formatted_address" ]
-        else
-          full_address              = form_params[ :street_address ] + ' ' + form_params[ :city ] + ' ' + form_params[ :zip_code ] + ' ' + form_params[ :state ]
-          form_params[ :address ]   = full_address
-        end
-        form_params.except!( 'lat_lng', 'street_address', 'city', 'zip_code', 'state' )
-        form_params
+    def deal_params
+      params.require( :deal ).permit( :food_name, :description, :address, :deal_type, :start_time, :end_time, :food_type, :avatar )
     end
 
-    def deals_params
-      params.require( :deal ).permit( :food_name, :description, :address, :deal_type, :start_time, :end_time, :food_type, :avatar )
+    def formatted_deal_params
+      form_params = params.require(:deal).permit(:food_name, :street_address, :city, :zip_code, :state, :deal_type, :start_time, :end_time, :food_type, :avatar)
+      full_address = form_params[ :street_address ] + ' ' + form_params[ :city ] + ' ' + form_params[ :zip_code ] + ' ' + form_params[ :state ]
+      form_params[ :address ] = full_address
+      form_params.except!( 'street_address', 'city', 'zip_code', 'state' )
+      form_params
     end
 
 end

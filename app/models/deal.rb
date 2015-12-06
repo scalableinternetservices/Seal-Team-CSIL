@@ -1,15 +1,12 @@
 class Deal < ActiveRecord::Base
 
-  DEAL_TYPES = [ 'Free',
-                 'Buy One Get One Free',
-                 'Buy One Get One Half Off',
-                 'Flash Deal' ]
-
   FOOD_TYPES = [ 'American',
                  'Mexican',
                  'Italian',
                  'Asian',
-                 'French' ]
+                 'French', 
+                 'Other',
+                  ]
 
   DISTANCES = [ '1',
                 '5',
@@ -22,20 +19,8 @@ class Deal < ActiveRecord::Base
                 '100']
 
   belongs_to :user
-
-  #Lat and Lng generated anyway if valid address
-  validates :food_name, :address, :start_time, :end_time, presence: true
-  #only validates accurate address format, not if its a non-real address
-  
-  # validate         :validate_street_address
-  validates        :deal_type, inclusion: DEAL_TYPES
+  validates :food_name, :address, :food_type, :start_time, :end_time, presence: true
   geocoded_by      :address
   after_validation :geocode
-
-  # def validate_address
-  #   if StreetAddress::US.parse(address).nil?
-  #     errors.add(address, "Need a valid address")
-  #   end
-  # end
 
 end
