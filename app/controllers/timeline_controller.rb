@@ -15,11 +15,11 @@ class TimelineController < ApplicationController
 
   def load_deals
   	distance_miles = params[ :distance_from_address ].to_f()
-    # if params[ :street_address ].present?
-    # 	location = Geocoder.search( params[ :street_address ] )
-    # else
-    #   location = Geocoder.search( get_lat(request.remote_ip.to_s) + ',' + get_lng(request.remote_ip.to_s) )
-    # end
+    if params[ :street_address ].present?
+    	location = Geocoder.search( params[ :street_address ] )
+    else
+      location = Geocoder.search( get_lat(request.remote_ip.to_s) + ',' + get_lng(request.remote_ip.to_s) )
+    end
     # lat = location[0].latitude
     # lng = location[0].longitude
     lat = '34.413347'.to_f
@@ -32,12 +32,12 @@ class TimelineController < ApplicationController
   private
 
   def get_address_data
-    # lat_lng_present = Rails.cache.fetch('lat' + request.remote_ip.to_s).present? && Rails.cache.fetch('lng'+ request.remote_ip.to_s).present?
-    # address_valid = false
-    # if lat_lng_present
-    #   geocoder_result = Geocoder.search( get_lat(request.remote_ip.to_s) + ',' + get_lng(request.remote_ip.to_s) )
-    #   address_valid = geocoder_result[0].nil? ? false : true
-    # end
+    lat_lng_present = Rails.cache.fetch('lat' + request.remote_ip.to_s).present? && Rails.cache.fetch('lng'+ request.remote_ip.to_s).present?
+    address_valid = false
+    if lat_lng_present
+      geocoder_result = Geocoder.search( get_lat(request.remote_ip.to_s) + ',' + get_lng(request.remote_ip.to_s) )
+      address_valid = geocoder_result[0].nil? ? false : true
+    end
     # address_data = address_valid ? geocoder_result[ 0 ].data["formatted_address"] : Geocoder.search( get_lat(request.remote_ip.to_s) + ',' + get_lng(request.remote_ip.to_s) )[ 0 ].data["formatted_address"]
     address_data = ''
   end
