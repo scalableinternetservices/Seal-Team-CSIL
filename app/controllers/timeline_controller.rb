@@ -28,13 +28,14 @@ class TimelineController < ApplicationController
   private
 
   def get_address_data
-    lat_lng_present = Rails.cache.fetch('lat' + request.remote_ip.to_s).present? && Rails.cache.fetch('lng'+ request.remote_ip.to_s).present?
+    ip = request.remote_ip.to_s
+    lat_lng_present = Rails.cache.fetch('lat' + ip).present? && Rails.cache.fetch('lng'+ ip).present?
     address_valid = false
     if lat_lng_present
-      geocoder_result = Geocoder.search( Rails.cache.fetch('lat'+ request.remote_ip.to_s) + ',' + Rails.cache.fetch('lng'+ request.remote_ip.to_s ) )
+      geocoder_result = Geocoder.search( Rails.cache.fetch('lat'+ ip) + ',' + Rails.cache.fetch('lng'+ ip ) )
       address_valid = geocoder_result.blank? ? false : true
     end
-    address_data = address_valid ? geocoder_result[ 0 ].data["formatted_address"] : Geocoder.search( get_lat(request.remote_ip.to_s) + ',' + get_lng(request.remote_ip.to_s) )[ 0 ].data["formatted_address"]
+    address_data = address_valid ? geocoder_result[ 0 ].data["formatted_address"] : Geocoder.search( get_lat(ip) + ',' + get_lng(ip) )[ 0 ].data["formatted_address"]
   end
 
 end
