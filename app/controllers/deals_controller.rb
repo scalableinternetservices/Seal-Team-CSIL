@@ -35,7 +35,7 @@ class DealsController < ApplicationController
 
   def update
     deal = Deal.find_by(:id => params[:deal_id])
-    deal.update(deals_params)
+    deal.update(deal_params)
     deal.save!
     flash[:success] = "Deal has been updated!"
     redirect_to "/users/#{current_user.id}/deals"
@@ -84,8 +84,8 @@ class DealsController < ApplicationController
         form_params
     end
 
-    def deals_params
-      params.require( :deal ).permit( :food_name, :description, :deal_type, :latitude, :longitude, :start_time, :end_time, :food_type, :avatar )
+    def deal_params
+      params.require( :deal ).permit( :food_name, :deal_type, :latitude, :longitude, :start_time, :end_time, :food_type, :avatar )
     end
 
 end
